@@ -155,7 +155,7 @@ export default function WhatPage() {
               <span className="font-bold text-white-90">동의</span>
             </li>
             <li>
-              ▸ 카카오톡 간편인증 → 생보+손보 전체 보험{" "}
+              ▸ 카카오 또는 네이버 간편인증 → 생보+손보 전체 보험{" "}
               <span className="font-bold text-white-90">자동 조회</span>
             </li>
             <li>
@@ -167,7 +167,7 @@ export default function WhatPage() {
             className="mt-8 text-caption text-white-40"
             variants={fadeUp}
           >
-            보험증권 불필요. 카카오톡 간편인증으로 전체 보험이 자동 조회됩니다.
+            보험증권 불필요. 간편인증만으로 전체 보험이 자동 조회됩니다.
           </motion.p>
         </WhatSection>
 
@@ -235,7 +235,7 @@ export default function WhatPage() {
             className="mt-6 text-body font-bold text-white-90"
             variants={fadeUp}
           >
-            &ldquo;내 돈을 찾아준다&rdquo;는 경험 —
+            &ldquo;내 돈을 찾아준다&rdquo;는 경험
             <br />
             이것만으로도 고객이 옵니다.
           </motion.p>
@@ -334,7 +334,7 @@ export default function WhatPage() {
 
         {/* ═══ S9: Phase 1 ═══ */}
         <WhatSection index={8}>
-          <SectionLabel label="PHASE 1" />
+          <SectionLabel label="PHASE 1 · 3~4개월" />
           <motion.h2 className="mt-6 text-h2 text-white-90" variants={fadeUp}>
             보장분석 + 갱신예측 + 숨은보험금
           </motion.h2>
@@ -363,7 +363,7 @@ export default function WhatPage() {
 
         {/* ═══ S10: Phase 2 ═══ */}
         <WhatSection index={9}>
-          <SectionLabel label="PHASE 2" />
+          <SectionLabel label="PHASE 2 · 1~2개월" />
           <motion.h2 className="mt-6 text-h2 text-white-90" variants={fadeUp}>
             연금 AI 진단 + 건강검진 연동
           </motion.h2>
@@ -404,7 +404,7 @@ export default function WhatPage() {
 
         {/* ═══ S11: Phase 3 ═══ */}
         <WhatSection index={10} center>
-          <SectionLabel label="PHASE 3" />
+          <SectionLabel label="PHASE 3 · 6개월+" />
           <motion.h2
             className="mt-6 text-h2 text-white-90"
             variants={fadeUp}
@@ -472,12 +472,18 @@ export default function WhatPage() {
             <br />
             이미 시작되고 있습니다
           </motion.h2>
-          <motion.div className="mt-12" variants={fadeUp}>
+          <motion.div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:gap-6" variants={fadeUp}>
             <Link
-              href="/"
+              href="/demo"
               className="inline-flex items-center gap-2 rounded-full border border-white-10 px-8 py-3 text-body font-medium text-white-90 transition-colors hover:border-white-40"
             >
-              ← 메인으로 돌아가기
+              데모 확인하기 →
+            </Link>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-caption text-white-40 transition-colors hover:text-white-90"
+            >
+              ← 메인으로
             </Link>
           </motion.div>
         </WhatSection>
