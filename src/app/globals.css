@@ -134,6 +134,7 @@ html {
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
+  overscroll-behavior: none;
   font-family: var(--font-sans);
   font-size: var(--font-body);
   line-height: var(--leading-body);

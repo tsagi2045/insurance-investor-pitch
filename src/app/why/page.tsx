@@ -408,7 +408,7 @@ export default function WhyPage() {
             <span className="text-h2 tabular-nums text-white-40">
               26,500명
             </span>
-            <span className="text-white-10">→</span>
+            <span className="text-white-40">→</span>
             <CountUp
               target={15000}
               suffix="명"

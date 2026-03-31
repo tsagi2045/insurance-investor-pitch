@@ -8,19 +8,13 @@ import { fadeUp } from "@/lib/motion";
 import Image from "next/image";
 import Link from "next/link";
 
-function DetailLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
+function DetailLink({ href }: { href: string }) {
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-2 text-body text-white-40 transition-colors duration-300 hover:text-white-90"
+      className="group inline-flex items-center gap-2 rounded-full border border-white-10 px-6 py-2.5 text-body text-white-90 transition-colors duration-300 hover:border-white-40"
     >
-      {children}
+      자세히 알아보기
       <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
         →
       </span>
@@ -46,7 +40,7 @@ export default function Home() {
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="max-w-md text-body leading-relaxed text-white-40"
+              className="max-w-md text-body leading-relaxed text-white-70"
             >
               2027년 분급제, 시장의 디지털 전환.
               <br />
@@ -56,7 +50,7 @@ export default function Home() {
               variants={fadeUp}
               className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8"
             >
-              <DetailLink href="/why">자세히 알아보기</DetailLink>
+              <DetailLink href="/why" />
             </motion.div>
           </div>
           <motion.div
@@ -95,7 +89,7 @@ export default function Home() {
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="max-w-md text-body leading-relaxed text-white-40"
+              className="max-w-md text-body leading-relaxed text-white-70"
             >
               경쟁사가 놓치고 있는 시장을 찾고,
               <br />
@@ -105,8 +99,7 @@ export default function Home() {
               variants={fadeUp}
               className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8"
             >
-              <DetailLink href="/how/blue-ocean">블루오션 발굴</DetailLink>
-              <DetailLink href="/how/team">새로운 팀 구축</DetailLink>
+              <DetailLink href="/how" />
             </motion.div>
           </div>
           <motion.div
@@ -145,7 +138,7 @@ export default function Home() {
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="max-w-md text-body leading-relaxed text-white-40"
+              className="max-w-md text-body leading-relaxed text-white-70"
             >
               단계별 로드맵, 절실한 인재,
               <br />
@@ -155,9 +148,7 @@ export default function Home() {
               variants={fadeUp}
               className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8"
             >
-              <DetailLink href="/what/roadmap">서비스 로드맵</DetailLink>
-              <DetailLink href="/what/recruit">인재 모집</DetailLink>
-              <DetailLink href="/what/matching">솔루션 매칭</DetailLink>
+              <DetailLink href="/what" />
             </motion.div>
           </div>
           <motion.div

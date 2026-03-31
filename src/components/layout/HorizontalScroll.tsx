@@ -41,6 +41,10 @@ export default function HorizontalScroll({
       touchStartY.current = e.touches[0].clientY;
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
     const handleTouchEnd = (e: TouchEvent) => {
       if (isAnimating.current) return;
       const delta = touchStartY.current - e.changedTouches[0].clientY;
@@ -60,12 +64,14 @@ export default function HorizontalScroll({
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("keydown", handleKeyDown);
     };
