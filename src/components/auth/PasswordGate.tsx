@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, staggerNormal } from "@/lib/motion";
+import Image from "next/image";
 
 const STORAGE_KEY = "pitch-auth";
 const EXPIRY_DAYS = 7;
@@ -25,23 +26,6 @@ function setAuthenticated() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ expiry }));
 }
 
-function LockIcon() {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="rgba(255,255,255,0.4)"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="11" width="18" height="11" rx="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-    </svg>
-  );
-}
 
 export default function PasswordGate({
   children,
@@ -84,11 +68,18 @@ export default function PasswordGate({
         variants={staggerNormal}
       >
         <motion.div variants={fadeUp}>
-          <LockIcon />
+          <Image
+            src="/images/lock.png"
+            alt="자물쇠"
+            width={480}
+            height={480}
+            className="w-20 h-20"
+            priority
+          />
         </motion.div>
 
         <motion.p
-          className="mt-6 text-label tracking-[0.2em] text-white-40"
+          className="mt-8 text-label tracking-[0.2em] text-white-40"
           variants={fadeUp}
         >
           CONFIDENTIAL
