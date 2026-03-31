@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN SYSTEM — Insurance Investor Pitch
+   Dark Navy + Amber/Gold | Pretendard
+   ============================================ */
+
+/* === Primitives === */
+:root {
+  /* Navy */
+  --navy-950: #0a0e1a;
+  --navy-900: #111827;
+  --navy-800: #1e293b;
+  --navy-700: #334155;
+  --navy-600: #475569;
+
+  /* Amber */
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+
+  /* White Opacity */
+  --white: #ffffff;
+  --white-90: rgba(255, 255, 255, 0.9);
+  --white-70: rgba(255, 255, 255, 0.7);
+  --white-40: rgba(255, 255, 255, 0.4);
+  --white-10: rgba(255, 255, 255, 0.1);
+  --white-05: rgba(255, 255, 255, 0.05);
+
+  /* === Semantic === */
+  --bg-primary: var(--navy-950);
+  --bg-surface: var(--navy-800);
+  --bg-elevated: var(--navy-700);
+
+  --text-primary: var(--white-90);
+  --text-secondary: var(--white-70);
+  --text-muted: var(--white-40);
+  --text-accent: var(--amber-400);
+
+  --border-default: var(--white-10);
+  --border-hover: var(--amber-400);
+
+  /* === Component === */
+  --btn-primary-bg: var(--amber-400);
+  --btn-primary-text: var(--navy-950);
+  --btn-ghost-border: var(--white-10);
+  --btn-ghost-text: var(--white-90);
+
+  --nav-bg: rgba(10, 14, 26, 0.8);
+  --nav-blur: 20px;
+
+  --card-bg: var(--navy-800);
+  --card-border: var(--white-10);
+  --card-border-hover: rgba(251, 191, 36, 0.3);
+
+  /* === Typography === */
+  --font-display: clamp(3rem, 5vw, 4.5rem);
+  --font-h1: clamp(2.25rem, 3.5vw, 3rem);
+  --font-h2: clamp(1.5rem, 2.5vw, 2rem);
+  --font-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --font-body: clamp(1rem, 1.2vw, 1.125rem);
+  --font-caption: clamp(0.8125rem, 1vw, 0.875rem);
+  --font-label: 0.75rem;
+
+  --leading-display: 1.0;
+  --leading-heading: 1.05;
+  --leading-subhead: 1.2;
+  --leading-body: 1.6;
+  --leading-caption: 1.4;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* === Spacing === */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* === Animation === */
+  --ease-signature: cubic-bezier(0.625, 0.05, 0, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  --duration-slower: 1200ms;
+}
+
+/* === Tailwind Theme Integration === */
+@theme inline {
+  /* Colors */
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+
+  --color-amber-300: var(--amber-300);
+  --color-amber-400: var(--amber-400);
+  --color-amber-500: var(--amber-500);
+
+  --color-white-90: var(--white-90);
+  --color-white-70: var(--white-70);
+  --color-white-40: var(--white-40);
+  --color-white-10: var(--white-10);
+  --color-white-05: var(--white-05);
+
+  /* Font */
+  --font-sans: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.8s var(--ease-signature) both;
+  --animate-fade-in: fade-in 0.6s var(--ease-smooth) both;
+}
+
+/* === Base Styles === */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--amber-400);
+  color: var(--navy-950);
+}
+
+/* === Typography Utilities === */
+.text-display {
+  font-size: var(--font-display);
+  font-weight: var(--weight-extrabold);
+  line-height: var(--leading-display);
+  letter-spacing: -0.02em;
+}
+
+.text-h1 {
+  font-size: var(--font-h1);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+  letter-spacing: -0.01em;
+}
+
+.text-h2 {
+  font-size: var(--font-h2);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-subhead);
+}
+
+.text-h3 {
+  font-size: var(--font-h3);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-subhead);
+}
+
+.text-body {
+  font-size: var(--font-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+}
+
+.text-caption {
+  font-size: var(--font-caption);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-caption);
+}
+
+.text-label {
+  font-size: var(--font-label);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* === Button Curtain Effect === */
+.btn-curtain {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.btn-curtain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--amber-300);
+  transform: translateY(105%);
+  transition: transform 0.4s var(--ease-signature);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.btn-curtain:hover::before {
+  transform: translateY(0);
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* === Keyframes === */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
