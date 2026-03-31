@@ -5,14 +5,15 @@ import { fadeUp } from "@/lib/motion";
 
 interface SectionLabelProps {
   label: string;
-  subtitle: string;
 }
 
-export default function SectionLabel({ label, subtitle }: SectionLabelProps) {
+export default function SectionLabel({ label }: SectionLabelProps) {
   return (
-    <motion.div variants={fadeUp}>
-      <span className="text-label text-amber-400">● {label}</span>
-      <p className="mt-1 text-caption text-white-40">{subtitle}</p>
-    </motion.div>
+    <motion.span
+      variants={fadeUp}
+      className="text-label tracking-[0.2em] text-white-40"
+    >
+      {label}
+    </motion.span>
   );
 }

@@ -17,13 +17,10 @@ export default function SectionPanel({
   return (
     <section
       id={id}
-      className={`relative flex h-screen w-screen shrink-0 items-center overflow-hidden ${className}`}
+      className={`relative flex h-screen w-screen shrink-0 overflow-hidden ${className}`}
     >
-      {/* Subtle gradient overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(251,191,36,0.03),transparent)]" />
-
       <motion.div
-        className="relative z-10 mx-auto w-full max-w-[1280px] px-[5%] md:px-[8%]"
+        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col justify-center px-6 pt-20 pb-24 md:px-12 lg:px-16"
         variants={staggerNormal}
         initial="hidden"
         animate="visible"

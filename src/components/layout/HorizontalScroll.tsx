@@ -82,20 +82,13 @@ export default function HorizontalScroll({
         {children}
       </div>
 
-      {/* Section Indicator */}
-      <div className="fixed right-8 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-3">
-        {Array.from({ length: sectionCount }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className={`transition-all duration-500 rounded-full ${
-              i === current
-                ? "h-8 w-2 bg-amber-400"
-                : "h-2 w-2 bg-white-40 hover:bg-white-70"
-            }`}
-            aria-label={`섹션 ${i + 1}로 이동`}
-          />
-        ))}
+      {/* Page indicator — minimal "1/3" style */}
+      <div className="fixed right-6 bottom-8 z-50 lg:right-10 lg:bottom-10">
+        <span className="text-caption tabular-nums tracking-wider text-white-40">
+          {current + 1}
+          <span className="mx-1 text-white-10">/</span>
+          {sectionCount}
+        </span>
       </div>
     </div>
   );
