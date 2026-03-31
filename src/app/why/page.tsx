@@ -31,7 +31,7 @@ function WhySection({
 
   return (
     <ActiveContext.Provider value={isActive}>
-      <section className="relative flex h-screen w-screen shrink-0 overflow-hidden">
+      <section className="relative flex h-screen w-screen shrink-0 overflow-hidden" style={{ height: "100dvh" }}>
         <motion.div
           className={`relative z-10 mx-auto flex w-full max-w-2xl flex-col justify-center px-6 md:px-12 ${center ? "items-center text-center" : ""}`}
           style={{ wordBreak: "keep-all" }}

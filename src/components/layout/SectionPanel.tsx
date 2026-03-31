@@ -18,6 +18,7 @@ export default function SectionPanel({
     <section
       id={id}
       className={`relative flex h-screen w-screen shrink-0 overflow-hidden ${className}`}
+      style={{ height: "100dvh" }}
     >
       <motion.div
         className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col justify-center px-6 pt-20 pb-24 md:px-12 lg:px-16"
