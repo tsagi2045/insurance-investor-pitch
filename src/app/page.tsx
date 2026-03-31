@@ -114,6 +114,7 @@ export default function Home() {
               width={1280}
               height={960}
               className="max-w-lg"
+              priority
             />
           </motion.div>
         </div>
@@ -159,6 +160,7 @@ export default function Home() {
               width={1280}
               height={960}
               className="max-w-lg"
+              priority
             />
           </motion.div>
         </div>
