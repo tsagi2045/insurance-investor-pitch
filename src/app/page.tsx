@@ -12,7 +12,7 @@ function DetailLink({ href }: { href: string }) {
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-2 rounded-full border border-white-10 px-6 py-2.5 text-body text-white-90 transition-colors duration-300 hover:border-white-40"
+      className="group inline-flex w-fit items-center gap-2 rounded-full border border-white-10 px-6 py-2.5 text-body text-white-90 transition-colors duration-300 hover:border-white-40"
     >
       자세히 알아보기
       <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">

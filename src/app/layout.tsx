@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import PasswordGate from "@/components/auth/PasswordGate";
 
 export const metadata: Metadata = {
   title: "AI 보험 분석 서비스 — 투자 제안",
@@ -22,7 +23,9 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+          <PasswordGate>{children}</PasswordGate>
+        </body>
     </html>
   );
 }
