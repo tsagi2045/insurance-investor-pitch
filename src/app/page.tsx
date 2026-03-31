@@ -63,14 +63,19 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
-            <Image
-              src="/images/why-hero-v2.png"
-              alt="균열이 퍼지는 유리 큐브"
-              width={1280}
-              height={960}
-              className="max-w-lg"
-              priority
-            />
+            <motion.div
+              animate={{ y: [0, -14, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            >
+              <Image
+                src="/images/why-hero-v2.png"
+                alt="균열이 퍼지는 유리 큐브"
+                width={1280}
+                height={960}
+                className="max-w-lg"
+                priority
+              />
+            </motion.div>
           </motion.div>
         </div>
       </SectionPanel>
@@ -108,14 +113,19 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
-            <Image
-              src="/images/how-hero-v2.png"
-              alt="빈틈을 선점하는 큐브"
-              width={1280}
-              height={960}
-              className="max-w-lg"
-              priority
-            />
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+            >
+              <Image
+                src="/images/how-hero-v2.png"
+                alt="빈틈을 선점하는 큐브"
+                width={1280}
+                height={960}
+                className="max-w-lg"
+                priority
+              />
+            </motion.div>
           </motion.div>
         </div>
       </SectionPanel>
@@ -154,14 +164,19 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
-            <Image
-              src="/images/what-hero-v2.png"
-              alt="단계별 유리 플레이트"
-              width={1280}
-              height={960}
-              className="max-w-lg"
-              priority
-            />
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }}
+            >
+              <Image
+                src="/images/what-hero-v2.png"
+                alt="단계별 유리 플레이트"
+                width={1280}
+                height={960}
+                className="max-w-lg"
+                priority
+              />
+            </motion.div>
           </motion.div>
         </div>
       </SectionPanel>
