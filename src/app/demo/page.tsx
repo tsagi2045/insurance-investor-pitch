@@ -24,12 +24,10 @@ const slide = {
 /* ═══ PHONE FRAME ═══ */
 function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative mx-auto w-[375px] h-[812px] rounded-[50px] p-[12px] shadow-[0_4px_60px_rgba(0,0,0,0.5)] bg-[#2A2A2C] ring-1 ring-white/[0.08]">
-      {/* Dynamic Island */}
+    <div className="relative mx-auto w-[375px] h-[812px] rounded-[50px] p-[12px] bg-[#2A2A2C]"
+      style={{ boxShadow: "0 0 0 1px rgba(255,255,255,0.1), 0 20px 60px rgba(0,0,0,0.6)" }}>
       <div className="absolute top-[18px] left-1/2 -translate-x-1/2 w-[120px] h-[34px] bg-black rounded-full z-30" />
-      {/* Screen */}
       <div className="relative w-full h-full bg-white rounded-[40px] overflow-hidden">
-        {/* Status bar */}
         <div className="absolute top-0 left-0 right-0 h-[54px] z-20 bg-white">
           <div className="flex items-end justify-between px-8 pb-1.5 h-full">
             <span className="text-[14px] font-semibold text-[#191F28]">9:41</span>
@@ -40,10 +38,8 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-        {/* Content */}
         <div className="h-full pt-[54px] overflow-hidden">{children}</div>
       </div>
-      {/* Home indicator */}
       <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-[134px] h-[5px] bg-white/20 rounded-full" />
     </div>
   );
@@ -56,16 +52,14 @@ function BottomSheet({ isOpen, onClose, title, children }: { isOpen: boolean; on
       {isOpen && (
         <div className="absolute inset-0 z-50 flex flex-col justify-end">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/40" onClick={onClose} />
-          <motion.div
-            initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
+          <motion.div initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="relative bg-white rounded-t-3xl max-h-[80%] flex flex-col"
-          >
+            className="relative bg-white rounded-t-3xl max-h-[80%] flex flex-col">
             <div className="flex justify-center pt-3 pb-1"><div className="w-10 h-1 rounded-full bg-[#E5E8EB]" /></div>
             <div className="flex items-center justify-between px-5 py-3 border-b border-[#F2F4F6]">
               <h3 className="text-[16px] font-bold text-[#191F28]">{title}</h3>
               <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F9FAFB]">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="#8B95A1" strokeWidth="2" strokeLinecap="round" /></svg>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="#8B95A1" strokeWidth="2" strokeLinecap="round"/></svg>
               </button>
             </div>
             <div className="flex-1 overflow-y-auto px-5 py-4 text-[13px] text-[#4E5968] leading-relaxed">{children}</div>
@@ -79,91 +73,58 @@ function BottomSheet({ isOpen, onClose, title, children }: { isOpen: boolean; on
   );
 }
 
+function Check({ on, small }: { on: boolean; small?: boolean }) {
+  const s = small ? "w-[18px] h-[18px]" : "w-[22px] h-[22px]";
+  return (
+    <div className={`${s} rounded-full flex items-center justify-center shrink-0 transition-colors ${on ? "bg-[#3182F6]" : "bg-[#D1D6DB]"}`}>
+      {on && <svg width={small ? 9 : 11} height={small ? 7 : 8} viewBox="0 0 14 10" fill="none"><path d="M1 5L5 9L13 1" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+    </div>
+  );
+}
+
 /* ═══ STEP 0: LANDING ═══ */
 function StepLanding({ onNext }: { onNext: () => void }) {
   return (
     <div className="h-full flex flex-col items-center justify-center px-6 text-center">
       <span className="inline-block px-3 py-1 rounded-full bg-[#E8F3FF] text-[11px] font-bold text-[#3182F6]">무료 AI 보험 분석</span>
-      <h1 className="mt-4 text-[24px] font-bold text-[#191F28] leading-tight">
-        내 보험,
-        <br />
-        30초 만에 진단받기
-      </h1>
-      <p className="mt-3 text-[13px] text-[#6B7684] leading-relaxed">
-        AI가 내 보험의 부족한 부분과
-        <br />
-        숨은 보험금을 찾아드립니다.
-      </p>
-      <button onClick={onNext} className="mt-8 w-full max-w-[260px] h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">
-        무료 진단받기
-      </button>
+      <h1 className="mt-4 text-[24px] font-bold text-[#191F28] leading-tight">내 보험,<br />30초 만에 진단받기</h1>
+      <p className="mt-3 text-[13px] text-[#6B7684] leading-relaxed">AI가 내 보험의 부족한 부분과<br />숨은 보험금을 찾아드립니다.</p>
+      <button onClick={onNext} className="mt-8 w-full max-w-[260px] h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">무료 진단받기</button>
       <div className="mt-4 flex items-center gap-3">
-        {["AI 보장 분석", "숨은 보험금", "갱신 예측"].map((t) => (
-          <span key={t} className="text-[11px] text-[#B0B8C1]">{t}</span>
-        ))}
+        {["AI 보장 분석", "숨은 보험금", "갱신 예측"].map((t) => <span key={t} className="text-[11px] text-[#B0B8C1]">{t}</span>)}
       </div>
     </div>
   );
 }
 
-/* ═══ STEP 1: LOGIN ═══ */
-function StepLogin({ onNext }: { onNext: () => void }) {
-  return (
-    <div className="h-full flex flex-col items-center justify-center px-8">
-      <h2 className="text-[20px] font-bold text-[#191F28] mb-8">간편 로그인</h2>
-      <div className="w-full space-y-3">
-        <button onClick={onNext} className="w-full h-[48px] rounded-2xl text-[15px] font-bold active:scale-[0.98] transition-transform flex items-center justify-center gap-2" style={{ backgroundColor: "#FEE500", color: "#191919" }}>
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>
-          카카오로 시작하기
-        </button>
-        <button className="w-full h-[48px] rounded-2xl text-[15px] font-bold text-white active:scale-[0.98] transition-transform flex items-center justify-center gap-2" style={{ backgroundColor: "#03C75A" }}>
-          <span className="text-[18px] font-black">N</span>
-          네이버로 시작하기
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/* ═══ STEP 2: CONSENT ═══ */
+/* ═══ STEP 1: CONSENT + LOGIN ═══ */
 function StepConsent({ onNext }: { onNext: () => void }) {
   const [checks, setChecks] = useState([false, false, false, false]);
   const [sheet, setSheet] = useState<number | null>(null);
-  const labels = [
-    "[필수] 서비스 이용약관 동의",
-    "[필수] 개인정보 수집·이용 동의",
-    "[필수] 제3자 제공 동의 (보험 데이터 조회)",
-    "[선택] 마케팅 정보 수신 동의",
-  ];
+  const labels = ["[필수] 서비스 이용약관 동의", "[필수] 개인정보 수집·이용 동의", "[필수] 제3자 제공 동의 (보험 데이터 조회)", "[선택] 마케팅 정보 수신 동의"];
   const details = [
     "본 서비스는 AI 기반 보험 보장 분석 서비스입니다.\n\n제1조 (목적)\n본 약관은 서비스 이용에 관한 기본적인 사항을 규정함을 목적으로 합니다.\n\n제2조 (서비스 내용)\n- 보험 계약 조회 및 보장 분석\n- AI 기반 보장 부족/과잉/중복 진단\n- 갱신형 보험료 예측\n- 숨은 보험금 조회\n\n제3조 (이용자의 의무)\n이용자는 정확한 본인 정보를 제공해야 하며, 타인의 정보를 도용할 수 없습니다.",
     "수집 항목: 이름, 연락처, 생년월일, 성별\n이용 목적: 보험 보장 분석 서비스 제공, 분석 결과 안내\n보유 기간: 서비스 이용 종료 후 1년\n\n동의를 거부할 권리가 있으나, 거부 시 서비스 이용이 제한됩니다.\n\n※ 수집된 개인정보는 목적 외 용도로 이용되지 않으며, 관련 법령에 따라 안전하게 관리됩니다.",
     "제공받는 자: 금융데이터 전문기업\n제공 항목: 이름, 생년월일, 휴대폰번호\n제공 목적: 보험 계약 조회를 위한 본인인증 및 보험사 데이터 조회\n보유 기간: 인증 완료 후 즉시 파기\n\n간편인증을 통해 생명보험사·손해보험사의 계약 데이터를 안전하게 조회합니다.",
-    "수신 항목: 보험 분석 결과 알림, 맞춤 보장 추천, 이벤트 안내\n수신 방법: 카카오톡 알림톡, 문자\n\n마케팅 수신 동의는 선택사항이며, 동의하지 않아도 서비스 이용이 가능합니다.\n수신 동의 후에도 언제든지 수신을 거부할 수 있습니다.",
+    "수신 항목: 보험 분석 결과 알림, 맞춤 보장 추천, 이벤트 안내\n수신 방법: 카카오톡 알림톡, 문자\n\n마케팅 수신 동의는 선택사항이며, 동의하지 않아도 서비스 이용이 가능합니다.",
   ];
   const allChecked = checks.every(Boolean);
   const requiredOk = checks[0] && checks[1] && checks[2];
-
-  const toggleAll = () => {
-    const next = !allChecked;
-    setChecks([next, next, next, next]);
-  };
-  const toggle = (i: number) => setChecks((prev) => prev.map((v, j) => (j === i ? !v : v)));
+  const toggleAll = () => { const n = !allChecked; setChecks([n, n, n, n]); };
+  const toggle = (i: number) => setChecks((p) => p.map((v, j) => (j === i ? !v : v)));
 
   return (
     <div className="h-full flex flex-col px-5 pt-4 relative">
       <p className="text-[12px] text-[#6B7684]">약관 동의</p>
       <h2 className="mt-2 text-[20px] font-bold text-[#191F28] leading-tight">서비스 이용을 위해<br />동의가 필요해요</h2>
       <div className="mt-5" />
-
-      <button onClick={toggleAll} className={`flex items-center gap-3 p-3.5 rounded-2xl mb-4 transition-colors ${allChecked ? "bg-[#E8F3FF]" : "bg-[#F9FAFB]"}`}>
+      <button onClick={toggleAll} className={`flex items-center gap-3 p-3.5 rounded-2xl mb-3 transition-colors ${allChecked ? "bg-[#E8F3FF]" : "bg-[#F9FAFB]"}`}>
         <Check on={allChecked} />
         <span className={`text-[15px] font-bold ${allChecked ? "text-[#3182F6]" : "text-[#191F28]"}`}>전체 동의</span>
       </button>
-
-      <div className="space-y-1">
+      <div className="space-y-0.5">
         {labels.map((label, i) => (
-          <div key={label} className="flex items-center justify-between py-3 px-1">
+          <div key={label} className="flex items-center justify-between py-2.5 px-1">
             <button onClick={() => toggle(i)} className="flex items-center gap-3 flex-1 min-w-0">
               <Check on={checks[i]} small />
               <span className={`text-[13px] transition-colors ${checks[i] ? "text-[#191F28]" : "text-[#B0B8C1]"}`}>{label}</span>
@@ -174,7 +135,6 @@ function StepConsent({ onNext }: { onNext: () => void }) {
           </div>
         ))}
       </div>
-
       <div className="mt-auto pb-6 space-y-2.5">
         <button onClick={onNext} disabled={!requiredOk}
           className={`w-full h-[48px] rounded-2xl text-[15px] font-bold transition-all flex items-center justify-center gap-2 ${requiredOk ? "active:scale-[0.98]" : "opacity-40 pointer-events-none"}`}
@@ -185,11 +145,9 @@ function StepConsent({ onNext }: { onNext: () => void }) {
         <button disabled={!requiredOk}
           className={`w-full h-[48px] rounded-2xl text-[15px] font-bold text-white transition-all flex items-center justify-center gap-2 ${requiredOk ? "active:scale-[0.98]" : "opacity-40 pointer-events-none"}`}
           style={{ backgroundColor: "#03C75A" }}>
-          <span className="text-[18px] font-black">N</span>
-          네이버로 시작하기
+          <span className="text-[18px] font-black">N</span> 네이버로 시작하기
         </button>
       </div>
-
       <BottomSheet isOpen={sheet !== null} onClose={() => setSheet(null)} title={sheet !== null ? labels[sheet] : ""}>
         <p className="whitespace-pre-line">{sheet !== null ? details[sheet] : ""}</p>
       </BottomSheet>
@@ -197,181 +155,276 @@ function StepConsent({ onNext }: { onNext: () => void }) {
   );
 }
 
-function Check({ on, small }: { on: boolean; small?: boolean }) {
-  const s = small ? "w-[18px] h-[18px]" : "w-[22px] h-[22px]";
-  return (
-    <div className={`${s} rounded-full flex items-center justify-center shrink-0 transition-colors ${on ? "bg-[#3182F6]" : "bg-[#D1D6DB]"}`}>
-      {on && <svg width={small ? 9 : 11} height={small ? 7 : 8} viewBox="0 0 14 10" fill="none"><path d="M1 5L5 9L13 1" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-    </div>
-  );
-}
-
-/* ═══ STEP 3: VERIFY ═══ */
+/* ═══ STEP 2: VERIFY (3-Phase) ═══ */
 function StepVerify({ onNext }: { onNext: () => void }) {
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    const t1 = setTimeout(() => setDone(true), 2200);
-    const t2 = setTimeout(onNext, 3200);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [onNext]);
-  return (
-    <div className="h-full flex flex-col items-center justify-center px-6 text-center">
-      <h2 className="text-[18px] font-bold text-[#191F28] mb-6">본인인증</h2>
-      {!done ? (
-        <>
-          <div className="w-10 h-10 border-[3px] border-[#3182F6] border-t-transparent rounded-full animate-spin mb-5" />
-          <p className="text-[15px] text-[#191F28] font-medium">카카오톡으로 인증 요청을 보냈습니다</p>
-          <p className="mt-2 text-[13px] text-[#B0B8C1]">카카오톡 앱에서 인증을 완료해 주세요</p>
-        </>
-      ) : (
-        <>
-          <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", damping: 15 }}
-            className="w-14 h-14 rounded-full bg-[#30B050] flex items-center justify-center mb-5">
-            <svg width="24" height="18" viewBox="0 0 14 10" fill="none"><path d="M1 5L5 9L13 1" stroke="white" strokeWidth="2.5" strokeLinecap="round"/></svg>
-          </motion.div>
-          <p className="text-[15px] font-bold text-[#191F28]">인증이 완료되었습니다</p>
-        </>
-      )}
-    </div>
-  );
-}
+  const [phase, setPhase] = useState<"requesting" | "confirm" | "complete">("requesting");
 
-/* ═══ STEP 4: LOADING ═══ */
-function StepLoading({ onNext }: { onNext: () => void }) {
-  const items = ["보험 계약 조회 완료", "보장 내역 분석 완료", "갱신형 보험료 예측 완료", "숨은 보험금 확인 완료", "AI 종합 분석 생성"];
-  const [done, setDone] = useState(0);
   useEffect(() => {
-    const timers = items.map((_, i) => setTimeout(() => setDone(i + 1), (i + 1) * 800));
-    const finish = setTimeout(onNext, items.length * 800 + 1000);
-    return () => { timers.forEach(clearTimeout); clearTimeout(finish); };
-  }, [onNext]);
+    if (phase !== "requesting") return;
+    const t = setTimeout(() => setPhase("confirm"), 1500);
+    return () => clearTimeout(t);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "complete") return;
+    const t = setTimeout(onNext, 1000);
+    return () => clearTimeout(t);
+  }, [phase, onNext]);
+
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8">
-      <div className="w-10 h-10 border-[3px] border-[#3182F6] border-t-transparent rounded-full animate-spin mb-8" />
-      <div className="space-y-4 w-full max-w-[260px]">
-        {items.map((text, i) => {
-          const completed = i < done;
-          const active = i === done - 1 && done <= items.length;
-          return (
-            <div key={text} className={`flex items-center gap-3 transition-all duration-300 ${completed || active ? "opacity-100" : "opacity-30"}`}>
-              {completed ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#30B050"/><path d="M4.5 8L7 10.5L11.5 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              ) : (
-                <div className={`w-4 h-4 rounded-full border-2 ${active ? "border-[#3182F6]" : "border-[#D1D6DB]"}`} />
-              )}
-              <span className={`text-[13px] ${completed ? "text-[#191F28]" : "text-[#B0B8C1]"}`}>{text}</span>
+    <div className="h-full flex flex-col bg-white relative overflow-hidden">
+      <AnimatePresence mode="wait">
+        {phase === "requesting" && (
+          <motion.div key="req" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="h-full flex flex-col items-center justify-center px-8">
+            <div className="relative w-16 h-16 mb-6">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: "#FEE500" }}>
+                <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>
+              </div>
+              <div className="absolute -inset-1 rounded-full border-[3px] border-transparent border-t-[#3182F6] animate-spin" />
             </div>
-          );
-        })}
-      </div>
+            <p className="text-[18px] font-bold text-[#191F28] mb-2">인증 요청을 보냈습니다</p>
+            <p className="text-[14px] text-[#6B7684] text-center">카카오톡 앱에서 확인해 주세요</p>
+            <div className="mt-8 bg-[#F9FAFB] rounded-2xl p-4 w-full">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="#4E5968" strokeWidth="1.5"/><circle cx="12" cy="18" r="1" fill="#4E5968"/></svg>
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-[#191F28]">카카오톡 앱 알림 확인</p>
+                  <p className="text-[11px] text-[#6B7684] mt-0.5">앱에서 인증 요청을 확인하고 승인해 주세요</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {phase === "confirm" && (
+          <motion.div key="cfm" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.25 }} className="h-full flex flex-col">
+            <div className="flex items-center justify-center h-12" style={{ backgroundColor: "#FEE500" }}>
+              <span className="text-[15px] font-bold text-[#191919]">카카오톡</span>
+            </div>
+            <div className="flex-1 px-6 pt-6">
+              <div className="text-center mb-6">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: "#FEE500" }}>
+                  <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>
+                </div>
+                <p className="text-[16px] font-bold text-[#191F28]">본인인증 요청</p>
+                <p className="text-[13px] text-[#6B7684] mt-1">보험분석 서비스</p>
+              </div>
+              <div className="bg-[#F9FAFB] rounded-2xl p-4 space-y-3 mb-6">
+                {[["이름", "김*수"], ["생년월일", "1991.**.**"], ["요청 서비스", "보험 계약 조회"], ["인증 유형", "간편인증"]].map(([k, v]) => (
+                  <div key={k} className="flex justify-between">
+                    <span className="text-[13px] text-[#6B7684]">{k}</span>
+                    <span className="text-[13px] font-medium text-[#191F28]">{v}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-[#B0B8C1] text-center leading-relaxed">위 정보로 본인인증을 진행합니다.<br />인증 정보는 보험 조회 목적으로만 사용됩니다.</p>
+            </div>
+            <div className="px-6 pb-8 pt-3 space-y-2">
+              <button onClick={() => setPhase("complete")} className="w-full h-[50px] rounded-xl text-[15px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: "#FEE500", color: "#191919" }}>인증하기</button>
+              <button className="w-full h-[44px] text-[14px] text-[#6B7684]">취소</button>
+            </div>
+          </motion.div>
+        )}
+
+        {phase === "complete" && (
+          <motion.div key="done" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+            className="h-full flex flex-col items-center justify-center px-8">
+            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 15, stiffness: 300, delay: 0.1 }}
+              className="w-16 h-16 rounded-full bg-[#3182F6] flex items-center justify-center mb-4">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </motion.div>
+            <p className="text-[18px] font-bold text-[#191F28] mb-2">본인인증 완료</p>
+            <p className="text-[14px] text-[#6B7684]">보험 데이터를 조회합니다...</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* ═══ STEP 5: DIAGNOSIS ═══ */
-function StepDiagnosis({ revealed, onConsult, onRenewal }: { revealed: boolean; onConsult: () => void; onRenewal: () => void }) {
-  return (
-    <div className="h-full flex flex-col overflow-y-auto px-5 pt-3 pb-5" style={{ WebkitOverflowScrolling: "touch" }}>
-      <p className="text-[11px] font-bold text-[#3182F6] tracking-wider">AI 보험 진단</p>
-      <h2 className="mt-1 text-[18px] font-bold text-[#191F28]">김민수님의 보험 분석</h2>
+/* ═══ STEP 3: LOADING ═══ */
+function StepLoading({ onNext }: { onNext: () => void }) {
+  const stages = [
+    { text: "보험 계약 조회 중", ms: 1000 },
+    { text: "보장 내역 분석 중", ms: 800 },
+    { text: "갱신형 보험료 예측 중", ms: 1000 },
+    { text: "숨은 보험금 확인 중", ms: 1200 },
+    { text: "AI 분석 리포트 생성 중", ms: 1000 },
+  ];
+  const total = stages.reduce((a, s) => a + s.ms, 0);
+  const [elapsed, setElapsed] = useState(0);
+  const [stage, setStage] = useState(0);
 
-      {/* 보장지수 */}
-      <div className="mt-4 flex items-center gap-4">
-        <div className="relative w-[60px] h-[60px] shrink-0">
-          <svg width="60" height="60" viewBox="0 0 60 60">
-            <circle cx="30" cy="30" r="25" fill="none" stroke="#F2F4F6" strokeWidth="6" />
-            <circle cx="30" cy="30" r="25" fill="none" stroke="#F04452" strokeWidth="6"
-              strokeDasharray={`${25 * 2 * Math.PI * 0.46} ${25 * 2 * Math.PI}`}
-              strokeLinecap="round" transform="rotate(-90 30 30)" />
-          </svg>
-          <span className="absolute inset-0 flex items-center justify-center text-[15px] font-bold text-[#F04452]">46%</span>
-        </div>
-        <div>
-          <p className="text-[15px] font-bold text-[#191F28]">보장지수 46%</p>
-          <p className="text-[12px] text-[#6B7684]">부족 항목 7개 · 우수 15개 · 미가입 19개</p>
-        </div>
+  useEffect(() => {
+    const interval = setInterval(() => setElapsed((e) => Math.min(e + 50, total)), 50);
+    return () => clearInterval(interval);
+  }, [total]);
+
+  useEffect(() => {
+    let acc = 0;
+    const timers = stages.map((s, i) => {
+      acc += s.ms;
+      return setTimeout(() => setStage(i + 1), acc);
+    });
+    const finish = setTimeout(onNext, total + 800);
+    return () => { timers.forEach(clearTimeout); clearTimeout(finish); };
+  }, [onNext, total]);
+
+  return (
+    <div className="h-full flex flex-col items-center justify-center px-6">
+      <div className="w-12 h-12 border-[3px] border-[#3182F6] border-t-transparent rounded-full animate-spin mb-6" />
+      <p className="text-[18px] font-bold text-[#191F28]">AI가 분석하고 있습니다</p>
+      <p className="mt-2 text-[13px] text-[#3182F6]">{stages[Math.min(stage, stages.length - 1)].text}...</p>
+
+      {/* Progress bar */}
+      <div className="mt-5 w-full max-w-[220px] h-[3px] bg-[#F2F4F6] rounded-full overflow-hidden">
+        <div className="h-full bg-[#3182F6] rounded-full transition-all duration-100" style={{ width: `${(elapsed / total) * 100}%` }} />
       </div>
 
-      {/* 보험 목록 */}
-      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">보유 보험 5건 · 월 304,590원</p>
-      <div className="mt-2 space-y-1.5">
-        {["메리츠화재 (무)건강보험", "메리츠화재 운전자보험", "우정사업본부 실손보험", "우정사업본부 종신보험", "우정사업본부 연금보험"].map((n) => (
-          <div key={n} className="flex items-center p-2.5 rounded-xl bg-[#F9FAFB]">
-            <span className="text-[12px] text-[#333D4B]">{n}</span>
+      {/* Checklist */}
+      <div className="mt-6 space-y-3 w-full max-w-[240px]">
+        {stages.map((s, i) => (
+          <div key={s.text} className={`flex items-center gap-3 transition-opacity duration-300 ${i <= stage ? "opacity-100" : "opacity-30"}`}>
+            {i < stage ? (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#30B050"/><path d="M4.5 8L7 10.5L11.5 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            ) : i === stage ? (
+              <div className="w-4 h-4 rounded-full border-2 border-[#3182F6] flex items-center justify-center"><div className="w-2 h-2 rounded-full bg-[#3182F6]" /></div>
+            ) : (
+              <div className="w-4 h-4 rounded-full border-2 border-[#D1D6DB]" />
+            )}
+            <span className={`text-[12px] ${i < stage ? "text-[#191F28]" : "text-[#B0B8C1]"}`}>{s.text}</span>
           </div>
         ))}
       </div>
 
-      {/* 모자이크 or 공개 영역 */}
-      <div className="mt-5">
-        <p className="text-[12px] font-bold text-[#6B7684] mb-2">상세 분석</p>
+      {/* Banner */}
+      <div className="mt-6 bg-[#E8F3FF] rounded-2xl px-4 py-3 w-full max-w-[260px] text-center">
+        <p className="text-[12px] text-[#3182F6]">💡 평균 <span className="font-bold">35만원</span>의 숨은 보험금이 발견됩니다</p>
+      </div>
+    </div>
+  );
+}
 
-        <div className={`p-3 rounded-xl bg-[#F9FAFB] transition-all duration-500 ${revealed ? "" : "select-none"}`}
-          style={{ filter: revealed ? "none" : "blur(4px)" }}>
-          <p className="text-[12px] text-[#333D4B]">암 보장: 1,500만원 (적정 2,800만원 대비 46% 부족)</p>
-          <p className="text-[12px] text-[#333D4B] mt-1">뇌혈관: 미가입 (적정 2,000만원 필요)</p>
-          <p className="text-[12px] text-[#333D4B] mt-1">심장: 500만원 (적정 2,000만원 대비 75% 부족)</p>
+/* ═══ STEP 4: DIAGNOSIS ═══ */
+const PRIORITIES = [
+  { title: "암 보장 1,300만원 부족", detail: "30대 위암 진료비 2,800만 vs 현재 1,500만", badge: "시급", bg: "#FEF2F2", border: "#F04452", badgeBg: "#F04452" },
+  { title: "실손보험 2건 중복", detail: "1건 정리 시 월 3만원 절약", badge: "절약", bg: "#FFF8E8", border: "#FFC34E", badgeBg: "#FFC34E" },
+  { title: "갱신형 50세에 보험료 2.3배", detail: "비갱신형 전환 검토 필요", badge: "주의", bg: "#E8F3FF", border: "#3182F6", badgeBg: "#3182F6" },
+];
+
+const INSURANCES = [
+  { company: "메리츠화재", product: "내Mom대로 보장보험", premium: "89,360", status: "조정", color: "#FFC34E" },
+  { company: "메리츠화재", product: "The가비로운 건강보험", premium: "165,630", status: "유지", color: "#30B050" },
+  { company: "우정사업본부", product: "우리가족건보보험", premium: "15,800", status: "주의", color: "#3182F6" },
+];
+
+function StepDiagnosis({ revealed, onConsult, onRenewal }: { revealed: boolean; onConsult: () => void; onRenewal: () => void }) {
+  return (
+    <div className="h-full flex flex-col overflow-y-auto px-5 pt-3 pb-5" style={{ WebkitOverflowScrolling: "touch" }}>
+      <p className="text-[11px] font-bold text-[#3182F6] tracking-wider">분석 완료</p>
+      <h2 className="mt-1 text-[18px] font-bold text-[#191F28]">김민수님의 보험 진단</h2>
+
+      {/* 보장지수 */}
+      <div className="mt-4 flex items-center gap-4">
+        <div className="relative w-[56px] h-[56px] shrink-0">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle cx="28" cy="28" r="23" fill="none" stroke="#F2F4F6" strokeWidth="5" />
+            <circle cx="28" cy="28" r="23" fill="none" stroke="#F04452" strokeWidth="5"
+              strokeDasharray={`${23 * 2 * Math.PI * 0.46} ${23 * 2 * Math.PI}`}
+              strokeLinecap="round" transform="rotate(-90 28 28)" />
+          </svg>
+          <span className="absolute inset-0 flex items-center justify-center text-[14px] font-bold text-[#F04452]">46%</span>
         </div>
-
-        <button onClick={onRenewal} className="mt-2 w-full p-3 rounded-xl bg-[#F9FAFB] text-left relative overflow-hidden">
-          {!revealed && <div className="absolute inset-0 bg-[#F9FAFB]" style={{ filter: "blur(4px)" }}>
-            <p className="p-3 text-[12px] text-[#333D4B]">갱신형 보험료 예측: 현재 2만원 → 10년 후 5.6만원...</p>
-          </div>}
-          <span className={`relative z-10 text-[12px] font-bold text-[#3182F6]`}>
-            갱신 예측 {revealed ? "보기" : "미리보기"} →
-          </span>
-        </button>
+        <div>
+          <p className="text-[14px] font-bold text-[#191F28]">보장지수 46%</p>
+          <p className="text-[11px] text-[#6B7684]">부족 7 · 우수 15 · 미가입 19</p>
+        </div>
       </div>
 
-      {/* 숨은 보험금 — revealed 시에만 표시 */}
-      {revealed && (
-        <div className="mt-5 animate-[fade-in_0.5s_ease-out]">
+      {/* 우선순위 카드 (공개) */}
+      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">핵심 진단</p>
+      <div className="mt-2 space-y-2">
+        {PRIORITIES.map((p) => (
+          <div key={p.title} className="flex rounded-xl overflow-hidden" style={{ backgroundColor: p.bg }}>
+            <div className="w-1 shrink-0" style={{ backgroundColor: p.border }} />
+            <div className="flex-1 p-3">
+              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold text-white mb-1" style={{ backgroundColor: p.badgeBg }}>{p.badge}</span>
+              <p className="text-[12px] font-bold text-[#191F28]">{p.title}</p>
+              <p className="text-[11px] text-[#6B7684] mt-0.5">{p.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 모자이크 영역: 보험별 진단 */}
+      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">보험별 진단</p>
+      <div className={`mt-2 space-y-1.5 transition-all duration-500 ${revealed ? "" : "select-none"}`} style={{ filter: revealed ? "none" : "blur(4px)" }}>
+        {INSURANCES.map((ins) => (
+          <div key={ins.product} className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB]">
+            <div className="min-w-0">
+              <p className="text-[11px] text-[#6B7684]">{ins.company}</p>
+              <p className="text-[12px] font-medium text-[#191F28] truncate">{ins.product}</p>
+            </div>
+            <span className="shrink-0 ml-2 px-2 py-0.5 rounded text-[10px] font-bold text-white" style={{ backgroundColor: ins.color }}>{ins.status}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* 갱신 예측 */}
+      <button onClick={onRenewal} className="mt-3 w-full p-3 rounded-xl bg-[#F9FAFB] text-left relative overflow-hidden">
+        {!revealed && <div className="absolute inset-0 bg-[#F9FAFB]" style={{ filter: "blur(4px)" }}><p className="p-3 text-[12px] text-[#333D4B]">갱신형 보험료 예측: 현재 2만원 → 10년 후 5.6만원...</p></div>}
+        <span className="relative z-10 text-[12px] font-bold text-[#3182F6]">갱신 예측 {revealed ? "보기" : "미리보기"} →</span>
+      </button>
+
+      {/* 숨은 보험금 */}
+      {revealed ? (
+        <div className="mt-4">
           <p className="text-[12px] font-bold text-[#3182F6]">숨은 보험금 발견</p>
-          <p className="text-[24px] font-bold text-[#3182F6] mt-1">50만원</p>
-          <div className="mt-3 space-y-2">
-            {[{ type: "휴면보험금", company: "○○생명", amount: "32만원" }, { type: "만기보험금", company: "△△화재", amount: "18만원" }].map((item) => (
-              <div key={item.type} className="flex items-center justify-between p-3 rounded-xl bg-[#F9FAFB]">
-                <div>
-                  <p className="text-[13px] font-bold text-[#191F28]">{item.type}</p>
-                  <p className="text-[11px] text-[#6B7684]">{item.company}</p>
-                </div>
-                <p className="text-[14px] font-bold text-[#3182F6]">{item.amount}</p>
+          <p className="text-[22px] font-bold text-[#3182F6] mt-1">50만원</p>
+          <div className="mt-2 space-y-1.5">
+            {[{ type: "휴면보험금", co: "○○생명", amt: "32만원" }, { type: "만기보험금", co: "△△화재", amt: "18만원" }].map((x) => (
+              <div key={x.type} className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB]">
+                <div><p className="text-[12px] font-bold text-[#191F28]">{x.type}</p><p className="text-[10px] text-[#6B7684]">{x.co}</p></div>
+                <p className="text-[13px] font-bold text-[#3182F6]">{x.amt}</p>
               </div>
             ))}
           </div>
           <KakaoButton />
         </div>
+      ) : (
+        <div className="mt-3 p-3 rounded-xl bg-[#E8F3FF]" style={{ filter: "blur(3px)" }}>
+          <p className="text-[12px] text-[#3182F6]">💰 숨은 보험금 50만원 발견...</p>
+        </div>
       )}
 
-      {/* CTA — revealed=false 시에만 */}
+      {/* CTA */}
       {!revealed && (
-        <div className="mt-5">
-          <button onClick={onConsult} className="w-full h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">
-            전체 분석 결과 보기
-          </button>
-          <p className="mt-2 text-[11px] text-[#B0B8C1] text-center">전체 결과를 보려면 상담 신청이 필요합니다</p>
+        <div className="mt-4 sticky bottom-0 bg-white pt-2 pb-1">
+          <button onClick={onConsult} className="w-full h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">전체 분석 결과 보기</button>
+          <p className="mt-1.5 text-[11px] text-[#B0B8C1] text-center">전체 결과를 보려면 상담 신청이 필요합니다</p>
         </div>
       )}
     </div>
   );
 }
 
-/* ═══ KAKAO BUTTON ═══ */
 function KakaoButton() {
   const [sent, setSent] = useState(false);
   return sent ? (
-    <div className="mt-4 flex items-center justify-center gap-2 py-3">
+    <div className="mt-3 flex items-center justify-center gap-2 py-3">
       <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5L5 9L13 1" stroke="#30B050" strokeWidth="2" strokeLinecap="round"/></svg>
       <span className="text-[13px] font-bold text-[#30B050]">알림톡 발송 완료</span>
     </div>
   ) : (
-    <button onClick={() => setSent(true)} className="mt-4 w-full h-[44px] rounded-2xl text-[14px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: "#FEE500", color: "#191919" }}>
-      카카오톡으로 청구 방법 안내받기
-    </button>
+    <button onClick={() => setSent(true)} className="mt-3 w-full h-[44px] rounded-2xl text-[14px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: "#FEE500", color: "#191919" }}>카카오톡으로 청구 방법 안내받기</button>
   );
 }
 
-/* ═══ STEP 6: RENEWAL ═══ */
+/* ═══ STEP 5: RENEWAL ═══ */
 function StepRenewal({ onBack }: { onBack: () => void }) {
   const data = [
     { age: "현재\n35세", amount: "2만원", height: 50, color: "#30B050" },
@@ -387,14 +440,11 @@ function StepRenewal({ onBack }: { onBack: () => void }) {
       </button>
       <h2 className="text-[18px] font-bold text-[#191F28]">갱신형 보험료 예측</h2>
       <p className="mt-1 text-[12px] text-[#6B7684]">현재 갱신형 보험 기준</p>
-
       <div className="mt-6 flex-1 flex items-end justify-center gap-4 pb-2">
         {data.map((d, i) => (
           <div key={d.age} className="flex flex-col items-center gap-2 flex-1">
             <motion.span className="text-[11px] font-bold" style={{ color: d.color }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + i * 0.2 }}>
-              {d.amount}
-            </motion.span>
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + i * 0.2 }}>{d.amount}</motion.span>
             <motion.div className="w-full max-w-[52px] rounded-t-lg" style={{ backgroundColor: d.color }}
               initial={{ height: 0 }} animate={{ height: d.height }}
               transition={{ duration: 0.8, delay: 0.2 + i * 0.2, ease: [0.16, 1, 0.3, 1] }} />
@@ -402,42 +452,24 @@ function StepRenewal({ onBack }: { onBack: () => void }) {
           </div>
         ))}
       </div>
-
       <div className="mt-4 p-3 rounded-xl bg-[#FEF2F2]">
-        <p className="text-[13px] text-[#333D4B] leading-relaxed text-center">
-          은퇴 후 소득은 줄어드는데
-          <br />
-          보험료는 <span className="font-bold text-[#F04452]">15배</span> 올라갑니다
-        </p>
+        <p className="text-[13px] text-[#333D4B] leading-relaxed text-center">은퇴 후 소득은 줄어드는데<br />보험료는 <span className="font-bold text-[#F04452]">15배</span> 올라갑니다</p>
       </div>
     </div>
   );
 }
 
-/* ═══ STEP 7: CONSULT ═══ */
+/* ═══ STEP 6: CONSULT ═══ */
 function StepConsult({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<"ask" | "done">("ask");
-
-  const handleClick = () => {
-    setPhase("done");
-    setTimeout(onComplete, 2000);
-  };
-
+  const handleClick = () => { setPhase("done"); setTimeout(onComplete, 2000); };
   return (
     <div className="h-full flex flex-col items-center justify-center px-6 text-center">
       {phase === "ask" ? (
         <>
           <h2 className="text-[20px] font-bold text-[#191F28] leading-tight">전체 분석 결과를<br />확인하세요</h2>
-          <p className="mt-4 text-[13px] text-[#6B7684] leading-relaxed">
-            상담을 신청하시면
-            <br />
-            모든 분석 결과를 확인할 수 있습니다.
-            <br />
-            담당 FC가 분석 리포트를 가지고 연락드립니다.
-          </p>
-          <button onClick={handleClick} className="mt-8 w-full max-w-[260px] h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">
-            상담 신청하기
-          </button>
+          <p className="mt-4 text-[13px] text-[#6B7684] leading-relaxed">상담을 신청하시면<br />모든 분석 결과를 확인할 수 있습니다.<br />담당 FC가 분석 리포트를 가지고 연락드립니다.</p>
+          <button onClick={handleClick} className="mt-8 w-full max-w-[260px] h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">상담 신청하기</button>
         </>
       ) : (
         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center">
@@ -481,48 +513,33 @@ export default function DemoPage() {
 
   return (
     <div className="h-screen overflow-hidden bg-[#060912] flex flex-col" style={{ height: "100dvh" }}>
-      {/* Nav */}
       <nav className="shrink-0 flex items-center justify-between px-6 py-3 md:px-12">
         <Link href="/" className="group inline-flex items-center gap-2 text-[13px] text-white-40 transition-colors hover:text-white-90">
-          <span className="transition-transform group-hover:-translate-x-1">←</span>
-          메인으로
+          <span className="transition-transform group-hover:-translate-x-1">←</span> 메인으로
         </Link>
         <span className="text-[11px] font-medium tracking-[0.2em] text-white-40 uppercase">Demo</span>
       </nav>
 
-      {/* Main */}
       <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-16 px-6">
-        {/* Left info (PC) */}
         <div className="hidden lg:block w-[280px] shrink-0">
           <p className="text-[11px] font-bold tracking-wider text-white-40">인터랙티브 데모</p>
           <h1 className="mt-2 text-[22px] font-bold text-white-90 leading-tight">고객이 경험하는 화면</h1>
           <p className="mt-2 text-[13px] text-white-40">버튼을 눌러 단계별로 체험해 보세요</p>
-
           <div className="mt-5 p-3 rounded-2xl border border-white-10">
             <div className="flex items-center gap-2">
               <span className="inline-flex w-5 h-5 items-center justify-center rounded-full bg-white-10 text-[10px] font-bold text-white-90">{step + 1}</span>
               <span className="text-[13px] font-bold text-white-90">{STEPS[step]?.title}</span>
             </div>
           </div>
-
           <div className="mt-3 flex items-center gap-1.5 flex-wrap">
             {STEPS.map((_, i) => (
               <button key={i} onClick={() => { setShowRenewal(false); goTo(i); }}
-                className={`w-7 h-7 rounded-full text-[11px] font-bold transition-all ${i === step ? "bg-white-90 text-[#060912]" : i < step ? "bg-white-10 text-white-90" : "bg-white-05 text-white-40"}`}>
-                {i + 1}
-              </button>
+                className={`w-7 h-7 rounded-full text-[11px] font-bold transition-all ${i === step ? "bg-white-90 text-[#060912]" : i < step ? "bg-white-10 text-white-90" : "bg-white-05 text-white-40"}`}>{i + 1}</button>
             ))}
           </div>
-
-          {step > 0 && (
-            <button onClick={() => { setShowRenewal(false); setRevealed(false); goTo(0); }}
-              className="mt-3 text-[12px] text-white-40 hover:text-white-90 transition-colors">
-              ← 처음부터 다시
-            </button>
-          )}
+          {step > 0 && <button onClick={() => { setShowRenewal(false); setRevealed(false); goTo(0); }} className="mt-3 text-[12px] text-white-40 hover:text-white-90 transition-colors">← 처음부터 다시</button>}
         </div>
 
-        {/* Phone */}
         <div className="shrink-0 scale-[0.7] sm:scale-[0.75] lg:scale-[0.62] xl:scale-[0.68] origin-center">
           <PhoneFrame>
             <AnimatePresence mode="wait" custom={dir}>
@@ -536,7 +553,6 @@ export default function DemoPage() {
         </div>
       </div>
 
-      {/* Mobile step indicator */}
       <div className="shrink-0 lg:hidden flex items-center justify-center gap-1.5 pb-4">
         {STEPS.map((_, i) => (
           <button key={i} onClick={() => { setShowRenewal(false); goTo(i); }}
