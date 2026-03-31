@@ -48,9 +48,9 @@ export default function Home() {
               variants={fadeUp}
               className="max-w-md text-body leading-relaxed text-white-40"
             >
-              규제와 시장이 동시에 바뀌고 있습니다.
+              2027년 분급제, 시장의 디지털 전환.
               <br />
-              기존 방식으로는 생존이 안 됩니다.
+              기존 방식으로는 생존할 수 없습니다.
             </motion.p>
             <motion.div
               variants={fadeUp}
@@ -93,9 +93,9 @@ export default function Home() {
               variants={fadeUp}
               className="max-w-md text-body leading-relaxed text-white-40"
             >
-              경쟁사가 못하는 블루오션을 발굴하고,
+              경쟁사가 놓치고 있는 시장을 찾고,
               <br />
-              AI 무기를 쓸 수 있는 새로운 팀을 만듭니다.
+              그 시장을 공략할 팀을 새로 만듭니다.
             </motion.p>
             <motion.div
               variants={fadeUp}
@@ -137,9 +137,9 @@ export default function Home() {
               variants={fadeUp}
               className="max-w-md text-body leading-relaxed text-white-40"
             >
-              검증된 로드맵, 헝그리한 인재,
+              단계별 로드맵, 절실한 인재,
               <br />
-              고객과 설계사를 잇는 AI 솔루션.
+              고객과 설계사를 연결하는 구조.
             </motion.p>
             <motion.div
               variants={fadeUp}
