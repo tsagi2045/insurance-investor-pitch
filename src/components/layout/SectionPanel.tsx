@@ -21,7 +21,7 @@ export default function SectionPanel({
       style={{ height: "100dvh" }}
     >
       <motion.div
-        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col justify-center px-6 pt-20 pb-24 md:px-12 lg:px-16"
+        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col justify-center px-6 pt-28 pb-24 md:px-12 md:pt-20 lg:px-16"
         variants={staggerNormal}
         initial="hidden"
         animate="visible"
