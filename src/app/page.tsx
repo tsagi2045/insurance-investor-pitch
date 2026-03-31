@@ -3,9 +3,9 @@
 import HorizontalScroll from "@/components/layout/HorizontalScroll";
 import SectionPanel from "@/components/layout/SectionPanel";
 import SectionLabel from "@/components/ui/SectionLabel";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
+import Image from "next/image";
 import Link from "next/link";
 
 function DetailLink({
@@ -64,7 +64,14 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
-            <ImagePlaceholder imageId="why-hero" className="max-w-lg" />
+            <Image
+              src="/images/why-hero.png"
+              alt="변화의 파도"
+              width={1280}
+              height={960}
+              className="max-w-lg"
+              priority
+            />
           </motion.div>
         </div>
       </SectionPanel>
@@ -102,7 +109,13 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
-            <ImagePlaceholder imageId="how-hero" className="max-w-lg" />
+            <Image
+              src="/images/how-hero.png"
+              alt="빈틈을 채우는 전략"
+              width={1280}
+              height={960}
+              className="max-w-lg"
+            />
           </motion.div>
         </div>
       </SectionPanel>
@@ -141,7 +154,13 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
-            <ImagePlaceholder imageId="what-hero" className="max-w-lg" />
+            <Image
+              src="/images/what-hero.png"
+              alt="실행 로드맵"
+              width={1280}
+              height={960}
+              className="max-w-lg"
+            />
           </motion.div>
         </div>
       </SectionPanel>
