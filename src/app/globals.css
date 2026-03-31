@@ -7,12 +7,12 @@
 
 /* === Primitives === */
 :root {
-  /* Navy */
-  --navy-950: #0a0e1a;
-  --navy-900: #111827;
-  --navy-800: #1e293b;
-  --navy-700: #334155;
-  --navy-600: #475569;
+  /* Navy — deeper, richer tones */
+  --navy-950: #060912;
+  --navy-900: #0c1120;
+  --navy-800: #141d30;
+  --navy-700: #1e2d47;
+  --navy-600: #2a3f5f;
 
   /* Amber */
   --amber-300: #fcd34d;
