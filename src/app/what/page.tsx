@@ -155,7 +155,7 @@ export default function WhatPage() {
               <span className="font-bold text-white-90">동의</span>
             </li>
             <li>
-              ▸ CODEF 간편인증 → 생보+손보 전체 보험{" "}
+              ▸ 카카오톡 간편인증 → 생보+손보 전체 보험{" "}
               <span className="font-bold text-white-90">자동 조회</span>
             </li>
             <li>
@@ -167,7 +167,7 @@ export default function WhatPage() {
             className="mt-8 text-caption text-white-40"
             variants={fadeUp}
           >
-            보험증권 불필요. 간편인증으로 전체 보험이 자동 조회됩니다.
+            보험증권 불필요. 카카오톡 간편인증으로 전체 보험이 자동 조회됩니다.
           </motion.p>
         </WhatSection>
 
@@ -321,7 +321,7 @@ export default function WhatPage() {
 
         {/* ═══ S8: Hero — 로드맵 진입 ═══ */}
         <WhatSection index={7} center>
-          <SectionLabel label="POINT 4 · 로드맵" />
+          <SectionLabel label="POINT 2 · 로드맵" />
           <motion.h2
             className="mt-8 text-h1 text-white-90"
             variants={fadeUp}
