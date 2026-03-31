@@ -7,8 +7,7 @@ import Link from "next/link";
 /* ═══ CONSTANTS ═══ */
 const STEPS = [
   { label: "랜딩", title: "서비스 첫 화면" },
-  { label: "로그인", title: "소셜 로그인" },
-  { label: "동의", title: "서비스 이용 동의" },
+  { label: "동의+로그인", title: "약관 동의" },
   { label: "인증", title: "카카오톡 간편인증" },
   { label: "AI 분석", title: "분석 중" },
   { label: "분석 결과", title: "AI 보험 진단" },
@@ -128,26 +127,34 @@ function StepLogin({ onNext }: { onNext: () => void }) {
 
 /* ═══ STEP 2: CONSENT ═══ */
 function StepConsent({ onNext }: { onNext: () => void }) {
-  const [checks, setChecks] = useState([true, true, false]);
+  const [checks, setChecks] = useState([false, false, false, false]);
   const [sheet, setSheet] = useState<number | null>(null);
-  const labels = ["[필수] 개인정보 수집·이용 동의", "[필수] 제3자 제공 동의 — CODEF", "[선택] 마케팅 정보 수신 동의"];
+  const labels = [
+    "[필수] 서비스 이용약관 동의",
+    "[필수] 개인정보 수집·이용 동의",
+    "[필수] 제3자 제공 동의 (보험 데이터 조회)",
+    "[선택] 마케팅 정보 수신 동의",
+  ];
   const details = [
-    "수집 항목: 이름, 연락처, 생년월일, 성별\n이용 목적: 보험 보장 분석 서비스 제공\n보유 기간: 서비스 이용 종료 후 1년\n\n동의를 거부할 권리가 있으나, 거부 시 서비스 이용이 제한됩니다.",
-    "제공받는 자: 코드에프(CODEF)\n제공 항목: 이름, 생년월일, 휴대폰번호\n제공 목적: 보험 계약 조회를 위한 본인인증\n보유 기간: 인증 완료 후 즉시 파기\n\nCODEF는 금융데이터 전문기업으로, 간편인증을 통해 보험사 데이터를 안전하게 조회합니다.",
-    "수신 항목: 보험 분석 결과 알림, 맞춤 보장 추천, 이벤트 안내\n수신 방법: 카카오톡 알림톡, 문자\n\n마케팅 수신 동의는 선택사항이며, 동의하지 않아도 서비스 이용이 가능합니다.",
+    "본 서비스는 AI 기반 보험 보장 분석 서비스입니다.\n\n제1조 (목적)\n본 약관은 서비스 이용에 관한 기본적인 사항을 규정함을 목적으로 합니다.\n\n제2조 (서비스 내용)\n- 보험 계약 조회 및 보장 분석\n- AI 기반 보장 부족/과잉/중복 진단\n- 갱신형 보험료 예측\n- 숨은 보험금 조회\n\n제3조 (이용자의 의무)\n이용자는 정확한 본인 정보를 제공해야 하며, 타인의 정보를 도용할 수 없습니다.",
+    "수집 항목: 이름, 연락처, 생년월일, 성별\n이용 목적: 보험 보장 분석 서비스 제공, 분석 결과 안내\n보유 기간: 서비스 이용 종료 후 1년\n\n동의를 거부할 권리가 있으나, 거부 시 서비스 이용이 제한됩니다.\n\n※ 수집된 개인정보는 목적 외 용도로 이용되지 않으며, 관련 법령에 따라 안전하게 관리됩니다.",
+    "제공받는 자: 금융데이터 전문기업\n제공 항목: 이름, 생년월일, 휴대폰번호\n제공 목적: 보험 계약 조회를 위한 본인인증 및 보험사 데이터 조회\n보유 기간: 인증 완료 후 즉시 파기\n\n간편인증을 통해 생명보험사·손해보험사의 계약 데이터를 안전하게 조회합니다.",
+    "수신 항목: 보험 분석 결과 알림, 맞춤 보장 추천, 이벤트 안내\n수신 방법: 카카오톡 알림톡, 문자\n\n마케팅 수신 동의는 선택사항이며, 동의하지 않아도 서비스 이용이 가능합니다.\n수신 동의 후에도 언제든지 수신을 거부할 수 있습니다.",
   ];
   const allChecked = checks.every(Boolean);
-  const requiredOk = checks[0] && checks[1];
+  const requiredOk = checks[0] && checks[1] && checks[2];
 
   const toggleAll = () => {
     const next = !allChecked;
-    setChecks([next, next, next]);
+    setChecks([next, next, next, next]);
   };
   const toggle = (i: number) => setChecks((prev) => prev.map((v, j) => (j === i ? !v : v)));
 
   return (
     <div className="h-full flex flex-col px-5 pt-4 relative">
-      <h2 className="text-[18px] font-bold text-[#191F28] mb-5">서비스 이용 동의</h2>
+      <p className="text-[12px] text-[#6B7684]">약관 동의</p>
+      <h2 className="mt-2 text-[20px] font-bold text-[#191F28] leading-tight">서비스 이용을 위해<br />동의가 필요해요</h2>
+      <div className="mt-5" />
 
       <button onClick={toggleAll} className={`flex items-center gap-3 p-3.5 rounded-2xl mb-4 transition-colors ${allChecked ? "bg-[#E8F3FF]" : "bg-[#F9FAFB]"}`}>
         <Check on={allChecked} />
@@ -168,10 +175,18 @@ function StepConsent({ onNext }: { onNext: () => void }) {
         ))}
       </div>
 
-      <div className="mt-auto pb-8">
+      <div className="mt-auto pb-6 space-y-2.5">
         <button onClick={onNext} disabled={!requiredOk}
-          className={`w-full h-[48px] rounded-2xl text-[15px] font-bold transition-all ${requiredOk ? "bg-[#3182F6] text-white active:scale-[0.98]" : "bg-[#F2F4F6] text-[#B0B8C1]"}`}>
-          동의하고 계속하기
+          className={`w-full h-[48px] rounded-2xl text-[15px] font-bold transition-all flex items-center justify-center gap-2 ${requiredOk ? "active:scale-[0.98]" : "opacity-40 pointer-events-none"}`}
+          style={{ backgroundColor: "#FEE500", color: "#191919" }}>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>
+          카카오로 시작하기
+        </button>
+        <button disabled={!requiredOk}
+          className={`w-full h-[48px] rounded-2xl text-[15px] font-bold text-white transition-all flex items-center justify-center gap-2 ${requiredOk ? "active:scale-[0.98]" : "opacity-40 pointer-events-none"}`}
+          style={{ backgroundColor: "#03C75A" }}>
+          <span className="text-[18px] font-black">N</span>
+          네이버로 시작하기
         </button>
       </div>
 
@@ -447,20 +462,19 @@ export default function DemoPage() {
   const goNext = useCallback(() => { setDir(1); setStep((s) => Math.min(s + 1, STEPS.length - 1)); }, []);
   const goTo = useCallback((t: number) => { if (t === step) return; setDir(t > step ? 1 : -1); setStep(t); }, [step]);
 
-  const handleConsult = () => goTo(7);
-  const handleConsultComplete = () => { setRevealed(true); goTo(5); };
+  const handleConsult = () => goTo(6);
+  const handleConsultComplete = () => { setRevealed(true); goTo(4); };
 
   const getStepContent = () => {
     if (showRenewal) return <StepRenewal key="renewal" onBack={() => setShowRenewal(false)} />;
     switch (step) {
       case 0: return <StepLanding key="s0" onNext={goNext} />;
-      case 1: return <StepLogin key="s1" onNext={goNext} />;
-      case 2: return <StepConsent key="s2" onNext={goNext} />;
-      case 3: return <StepVerify key="s3" onNext={goNext} />;
-      case 4: return <StepLoading key="s4" onNext={goNext} />;
-      case 5: return <StepDiagnosis key="s5" revealed={revealed} onConsult={handleConsult} onRenewal={() => setShowRenewal(true)} />;
-      case 6: return <StepRenewal key="s6" onBack={() => goTo(5)} />;
-      case 7: return <StepConsult key="s7" onComplete={handleConsultComplete} />;
+      case 1: return <StepConsent key="s1" onNext={goNext} />;
+      case 2: return <StepVerify key="s2" onNext={goNext} />;
+      case 3: return <StepLoading key="s3" onNext={goNext} />;
+      case 4: return <StepDiagnosis key="s4" revealed={revealed} onConsult={handleConsult} onRenewal={() => setShowRenewal(true)} />;
+      case 5: return <StepRenewal key="s5" onBack={() => goTo(4)} />;
+      case 6: return <StepConsult key="s6" onComplete={handleConsultComplete} />;
       default: return null;
     }
   };
