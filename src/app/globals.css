@@ -115,6 +115,22 @@
   --color-white-10: var(--white-10);
   --color-white-05: var(--white-05);
 
+  /* TDS (Toss Design System) — Demo page */
+  --color-toss-blue: #3182F6;
+  --color-toss-blue-light: #E8F3FF;
+  --color-toss-black: #191F28;
+  --color-toss-gray-900: #333D4B;
+  --color-toss-gray-700: #4E5968;
+  --color-toss-gray-600: #6B7684;
+  --color-toss-gray-400: #B0B8C1;
+  --color-toss-gray-300: #D1D6DB;
+  --color-toss-gray-200: #E5E8EB;
+  --color-toss-gray-100: #F2F4F6;
+  --color-toss-gray-50: #F9FAFB;
+  --color-toss-red: #F04452;
+  --color-toss-green: #30B050;
+  --color-toss-yellow: #FFC34E;
+
   /* Font */
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
