@@ -472,18 +472,12 @@ export default function WhatPage() {
             <br />
             이미 시작되고 있습니다
           </motion.h2>
-          <motion.div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:gap-6" variants={fadeUp}>
+          <motion.div className="mt-12" variants={fadeUp}>
             <Link
               href="/demo"
               className="inline-flex items-center gap-2 rounded-full border border-white-10 px-8 py-3 text-body font-medium text-white-90 transition-colors hover:border-white-40"
             >
               데모 확인하기 →
-            </Link>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-caption text-white-40 transition-colors hover:text-white-90"
-            >
-              ← 메인으로
             </Link>
           </motion.div>
         </WhatSection>
