@@ -56,8 +56,7 @@ export default function Home() {
               variants={fadeUp}
               className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8"
             >
-              <DetailLink href="/why/regulation">규제 변화</DetailLink>
-              <DetailLink href="/why/market">시장 대이동</DetailLink>
+              <DetailLink href="/why">자세히 알아보기</DetailLink>
             </motion.div>
           </div>
           <motion.div
@@ -65,8 +64,8 @@ export default function Home() {
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
             <Image
-              src="/images/why-hero.png"
-              alt="변화의 파도"
+              src="/images/why-hero-v2.png"
+              alt="균열이 퍼지는 유리 큐브"
               width={1280}
               height={960}
               className="max-w-lg"
@@ -110,8 +109,8 @@ export default function Home() {
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
             <Image
-              src="/images/how-hero.png"
-              alt="빈틈을 채우는 전략"
+              src="/images/how-hero-v2.png"
+              alt="빈틈을 선점하는 큐브"
               width={1280}
               height={960}
               className="max-w-lg"
@@ -155,8 +154,8 @@ export default function Home() {
             className="flex flex-1 items-center justify-center lg:justify-end"
           >
             <Image
-              src="/images/what-hero.png"
-              alt="실행 로드맵"
+              src="/images/what-hero-v2.png"
+              alt="단계별 유리 플레이트"
               width={1280}
               height={960}
               className="max-w-lg"

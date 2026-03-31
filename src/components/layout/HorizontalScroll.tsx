@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, createContext } from "react";
+
+export const ScrollContext = createContext(0);
 
 interface HorizontalScrollProps {
   children: React.ReactNode;
@@ -71,16 +73,18 @@ export default function HorizontalScroll({
 
   return (
     <div className="fixed inset-0 overflow-hidden">
-      <div
-        className="flex h-full transition-transform duration-[800ms]"
-        style={{
-          width: `${sectionCount * 100}vw`,
-          transform: `translateX(-${current * 100}vw)`,
-          transitionTimingFunction: "cubic-bezier(0.625, 0.05, 0, 1)",
-        }}
-      >
-        {children}
-      </div>
+      <ScrollContext.Provider value={current}>
+        <div
+          className="flex h-full transition-transform duration-[800ms]"
+          style={{
+            width: `${sectionCount * 100}vw`,
+            transform: `translateX(-${current * 100}vw)`,
+            transitionTimingFunction: "cubic-bezier(0.625, 0.05, 0, 1)",
+          }}
+        >
+          {children}
+        </div>
+      </ScrollContext.Provider>
 
       {/* Page indicator — minimal "1/3" style */}
       <div className="fixed right-6 bottom-8 z-50 lg:right-10 lg:bottom-10">
