@@ -161,22 +161,22 @@ export default function HowPage() {
                 <tr className="text-white-40">
                   <th className="text-left py-2 pr-2 font-medium" />
                   <th className="px-2 py-2 font-medium text-center">보장<br/>분석</th>
-                  <th className="px-2 py-2 font-medium text-center">갱신<br/>예측</th>
                   <th className="px-2 py-2 font-medium text-center">숨은<br/>보험금</th>
-                  <th className="px-2 py-2 font-medium text-center">연금<br/>AI</th>
+                  <th className="px-2 py-2 font-medium text-center">갱신형<br/>보험료 예측</th>
+                  <th className="px-2 py-2 font-medium text-center">연금보험<br/>AI 진단</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { name: "보닥", vals: ["○", "×", "×", "×"] },
-                  { name: "시그널플래너", vals: ["○", "×", "×", "×"] },
-                  { name: "토스인슈어런스", vals: ["○", "×", "×", "×"] },
-                  { name: "뱅크샐러드", vals: ["○", "×", "×", "×"] },
+                  { name: "보닥", vals: ["○", "○", "×", "×"] },
+                  { name: "시그널플래너", vals: ["○", "○", "×", "×"] },
+                  { name: "토스", vals: ["○", "○", "×", "×"] },
+                  { name: "뱅크샐러드", vals: ["○", "○", "×", "×"] },
                 ].map((row) => (
                   <tr key={row.name} className="border-t border-white-05">
                     <td className="py-2.5 pr-2 text-white-40">{row.name}</td>
                     {row.vals.map((v, i) => (
-                      <td key={i} className={`px-2 py-2.5 text-center ${v === "○" ? "text-white-40" : v === "△" ? "text-white-40" : "text-white-40"}`}>{v}</td>
+                      <td key={i} className={`px-2 py-2.5 text-center ${v === "○" ? "text-white-40" : "text-white-40"}`}>{v}</td>
                     ))}
                   </tr>
                 ))}
