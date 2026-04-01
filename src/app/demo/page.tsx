@@ -112,22 +112,91 @@ function StepLanding({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ═══ STEP 1: SOCIAL LOGIN ═══ */
+/* ═══ STEP 1: SOCIAL LOGIN (3-Phase) ═══ */
 function StepLogin({ onNext }: { onNext: () => void }) {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    if (phase === 1) { const t = setTimeout(() => setPhase(2), 1500); return () => clearTimeout(t); }
+    if (phase === 2) { const t = setTimeout(onNext, 1500); return () => clearTimeout(t); }
+  }, [phase, onNext]);
+
+  const kakaoIcon = <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>;
+  const kakaoIconLg = <svg width="32" height="32" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>;
+
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8">
-      <h2 className="text-[22px] font-bold text-[#191F28] leading-tight text-center">시작하기</h2>
-      <p className="mt-2 text-[14px] text-[#6B7684] text-center">카카오, 네이버 중 하나로<br />로그인해 주세요.</p>
-      <div className="mt-8 w-full space-y-3">
-        <button onClick={onNext} className="w-full h-[48px] rounded-2xl text-[15px] font-bold active:scale-[0.98] transition-transform flex items-center justify-center gap-2" style={{ backgroundColor: "#FEE500", color: "#191919" }}>
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>
-          카카오로 시작하기
-        </button>
-        <button className="w-full h-[48px] rounded-2xl text-[15px] font-bold text-white active:scale-[0.98] transition-transform flex items-center justify-center gap-2" style={{ backgroundColor: "#03C75A" }}>
-          <span className="text-[18px] font-black">N</span> 네이버로 시작하기
-        </button>
-      </div>
-    </div>
+    <AnimatePresence mode="wait">
+      {/* Phase 0: 로그인 선택 */}
+      {phase === 0 && (
+        <motion.div key="p0" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}
+          className="h-full flex flex-col items-center justify-center px-8">
+          <h2 className="text-[22px] font-bold text-[#191F28] leading-tight text-center">시작하기</h2>
+          <p className="mt-2 text-[14px] text-[#6B7684] text-center">카카오, 네이버 중 하나로<br />로그인해 주세요.</p>
+          <div className="mt-8 w-full space-y-3">
+            <button onClick={() => setPhase(1)} className="w-full h-[48px] rounded-2xl text-[15px] font-bold active:scale-[0.98] transition-transform flex items-center justify-center gap-2" style={{ backgroundColor: "#FEE500", color: "#191919" }}>
+              {kakaoIcon} 카카오로 시작하기
+            </button>
+            <button onClick={() => setPhase(1)} className="w-full h-[48px] rounded-2xl text-[15px] font-bold text-white active:scale-[0.98] transition-transform flex items-center justify-center gap-2" style={{ backgroundColor: "#03C75A" }}>
+              <span className="text-[18px] font-black">N</span> 네이버로 시작하기
+            </button>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Phase 1: 카카오 로그인 폼 */}
+      {phase === 1 && (
+        <motion.div key="p1" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}
+          className="h-full flex flex-col items-center justify-center px-8">
+          <div className="mb-4">{kakaoIconLg}</div>
+          <h2 className="text-[18px] font-bold text-[#191919] mb-8">카카오계정으로 로그인</h2>
+          <div className="w-full space-y-3 mb-6">
+            <div className="w-full h-[48px] rounded-xl bg-[#F5F5F5] px-4 flex items-center">
+              <span className="text-[14px] text-[#999]">user@example.com</span>
+            </div>
+            <div className="w-full h-[48px] rounded-xl bg-[#F5F5F5] px-4 flex items-center">
+              <span className="text-[14px] text-[#999]">••••••••</span>
+            </div>
+          </div>
+          <button onClick={() => setPhase(2)} className="w-full h-[48px] rounded-xl text-[15px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: "#FEE500", color: "#191919" }}>
+            로그인
+          </button>
+        </motion.div>
+      )}
+
+      {/* Phase 2: 카카오 정보 제공 동의 */}
+      {phase === 2 && (
+        <motion.div key="p2" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}
+          className="h-full flex flex-col px-6 pt-10">
+          <div className="flex items-center gap-3 mb-1">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#FEE500" }}>
+              {kakaoIcon}
+            </div>
+            <div>
+              <p className="text-[16px] font-bold text-[#191F28]">보험분석 서비스</p>
+              <p className="text-[13px] text-[#999]">다음 정보 제공에 동의합니다</p>
+            </div>
+          </div>
+          <div className="mt-8 space-y-5">
+            {["닉네임", "이메일", "전화번호", "생년월일·성별"].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <Check on={true} small />
+                <span className="text-[15px] font-medium text-[#191F28]">{item}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-[12px] text-[#999] leading-relaxed text-center">
+            서비스 이용을 위해 위 정보가 제공되며,
+            <br />
+            카카오 계정 설정에서 언제든 연결을 해제할 수 있습니다.
+          </p>
+          <div className="mt-auto mb-8">
+            <button onClick={onNext} className="w-full h-[48px] rounded-xl text-[15px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: "#FEE500", color: "#191919" }}>
+              동의하고 계속하기
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
