@@ -224,35 +224,40 @@ export default function WhatPage() {
         {/* ═══ S4: 숨은 보험금 ═══ */}
         <WhatSection index={3} center>
           <motion.p className="text-body text-white-40" variants={fadeUp}>
-            고객 1인당 평균
+            아직 찾아가지 않은
           </motion.p>
           <motion.div className="mt-4" variants={fadeUp}>
             <CountUp
-              target={35}
-              suffix="만원"
+              target={11.2}
+              suffix="조원"
               duration={2.5}
+              decimals={1}
               className="text-display font-extrabold tabular-nums text-white-90"
             />
           </motion.div>
-          <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
-            의 숨은 보험금이 잠들어 있습니다.
+          <motion.p className="mt-6 text-body leading-relaxed text-white-70" variants={fadeUp}>
+            숨은 보험금이란, 보험 가입자가 받을 수 있지만
             <br />
-            AI가 자동으로 찾아 금액과 청구 방법을 안내합니다.
+            아직 청구하지 않은 돈입니다.
+          </motion.p>
+          <motion.p className="mt-4 text-body leading-relaxed text-white-40" variants={fadeUp}>
+            만기 환급금, 휴면 보험금, 미청구 사고 보험금 —
+            <br />
+            본인도 모르는 사이 보험사에 잠들어 있습니다.
           </motion.p>
           <motion.p
             className="mt-6 text-body font-bold text-white-90"
             variants={fadeUp}
           >
-            &ldquo;내 돈을 찾아준다&rdquo;는 경험
+            AI가 자동으로 찾아
             <br />
-            이것만으로도 고객이 옵니다.
+            금액과 청구 방법을 안내합니다.
           </motion.p>
           <motion.p
             className="mt-8 text-caption text-white-40"
             variants={fadeUp}
           >
-            대한민국 휴면보험금 총 규모 약 12조원
-            (생명보험협회/손해보험협회)
+            출처: 금융위원회 보도자료 (2025)
           </motion.p>
         </WhatSection>
 

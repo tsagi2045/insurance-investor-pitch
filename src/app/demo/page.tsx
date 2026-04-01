@@ -307,7 +307,7 @@ function StepLoading({ onNext }: { onNext: () => void }) {
           </div>
         ))}
       </div>
-      <div className="mt-6 bg-[#E8F3FF] rounded-2xl px-4 py-3 w-full max-w-[260px] text-center"><p className="text-[12px] text-[#3182F6]">💡 평균 <span className="font-bold">35만원</span>의 숨은 보험금이 발견됩니다</p></div>
+      <div className="mt-6 bg-[#E8F3FF] rounded-2xl px-4 py-3 w-full max-w-[280px] text-center"><p className="text-[12px] text-[#3182F6]">💡 대한민국 숨은 보험금 총 <span className="font-bold">11.2조원</span> — 내 몫을 찾아보세요</p></div>
     </div>
   );
 }
