@@ -196,22 +196,22 @@ export default function HowPage() {
         {/* ═══ S3: 갱신 예측 숫자 ═══ */}
         <HowSection index={2} center>
           <motion.div className="flex items-baseline justify-center gap-4" variants={fadeUp}>
-            <span className="text-h2 tabular-nums text-white-40">월 2만원</span>
+            <span className="text-h2 tabular-nums text-white-40">연 47,000원</span>
             <span className="text-h3 text-white-40">→</span>
             <span className="text-h1 font-extrabold tabular-nums text-white-90">
-              월 <CountUp target={5.6} decimals={1} duration={2} className="text-h1 font-extrabold tabular-nums text-white-90" />만원
+              연 <CountUp target={134} duration={2} className="text-h1 font-extrabold tabular-nums text-white-90" />,000원
             </span>
           </motion.div>
           <motion.p className="mt-6 max-w-md text-body leading-relaxed text-white-70" variants={fadeUp}>
-            30대에 가입한 갱신형 암보험.
+            1세대 실손보험 갱신 사례.
             <br />
-            10년 뒤 갱신하면 보험료가 약 2.8배 올라갑니다.
+            예상 인상률 15~17%였지만, 실제 청구액은 약 2.8배.
             <br />
-            이 사실을 보여주는 서비스는 아직 없습니다.
+            이런 괴리를 미리 보여주는 서비스는 아직 없습니다.
           </motion.p>
           <Source>
             출처:{" "}
-            <SourceLink href="https://www.hankookilbo.com/News/Read/A2021022515400001308">
+            <SourceLink href="https://www.hankookilbo.com/news/article/A2021022515400001308">
               한국일보
             </SourceLink>{" "}
             (2021.02)
