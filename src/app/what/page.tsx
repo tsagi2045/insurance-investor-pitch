@@ -373,7 +373,7 @@ export default function WhatPage() {
         <WhatSection index={9}>
           <SectionLabel label="PHASE 2 · 1~2개월" />
           <motion.h2 className="mt-6 text-h2 text-white-90" variants={fadeUp}>
-            연금 AI 진단 + 건강검진 연동
+            연금 현황 분석 + 건강검진 연동
           </motion.h2>
           <motion.p
             className="mt-4 max-w-lg text-body leading-relaxed text-white-70"
@@ -387,10 +387,10 @@ export default function WhatPage() {
           >
             <li>
               ▸{" "}
-              <span className="font-bold text-white-90">연금 AI 진단</span>
+              <span className="font-bold text-white-90">연금 현황 분석</span>
               <br />
               <span className="text-caption text-white-40">
-                지금 유지 vs 연금저축펀드 이전 — 65세 수령액 비교
+                노후 적정 생활비 대비 현재 연금이 충분한지 진단. 부족분은 FC가 상담.
               </span>
             </li>
             <li>
@@ -398,7 +398,7 @@ export default function WhatPage() {
               <span className="font-bold text-white-90">건강검진 연동</span>
               <br />
               <span className="text-caption text-white-40">
-                건강 상태 기반 맞춤 보장 추천
+                건강 상태 기반 맞춤 보장 분석. 위험 항목은 FC가 상담.
               </span>
             </li>
           </motion.ul>
