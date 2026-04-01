@@ -241,7 +241,7 @@ function StepLoading({ onNext }: { onNext: () => void }) {
 /* ═══ STEP 5: DIAGNOSIS ═══ */
 function StepDiagnosis({ revealed, showBanner, onConsult, onRenewal, onAnalysis }: { revealed: boolean; showBanner: boolean; onConsult: () => void; onRenewal: () => void; onAnalysis: () => void }) {
   return (
-    <div className="h-full flex flex-col overflow-y-auto px-5 pt-3 pb-24" style={{ WebkitOverflowScrolling: "touch" }}>
+    <div className="h-full flex flex-col overflow-y-auto px-5 pt-3 pb-6" style={{ WebkitOverflowScrolling: "touch" }}>
       {/* 배너 */}
       {showBanner && (
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-3 p-2.5 rounded-xl bg-[#E8F8EE] flex items-center gap-2">
@@ -262,47 +262,65 @@ function StepDiagnosis({ revealed, showBanner, onConsult, onRenewal, onAnalysis 
         <div><p className="text-[14px] font-bold text-[#191F28]">보장지수 46%</p><p className="text-[11px] text-[#6B7684]">부족 7 · 우수 15 · 미가입 19</p></div>
       </div>
 
-      {/* 숨은 보험금 — revealed 시 상단 */}
-      {revealed && (
-        <div className="mt-4 p-3 rounded-xl bg-[#E8F3FF]">
-          <p className="text-[11px] font-bold text-[#3182F6]">💰 숨은 보험금 발견</p>
-          <p className="text-[20px] font-bold text-[#3182F6] mt-1">50만원</p>
-          <p className="text-[11px] text-[#6B7684] mt-1">휴면보험금 32만원 + 만기보험금 18만원</p>
-          <KakaoButton />
-        </div>
-      )}
+      {/* 핵심 진단 (공개, 상단 배치) */}
+      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">핵심 진단</p>
+      <div className="mt-2 space-y-2">
+        {PRIORITIES.map((p) => (
+          <button key={p.title} onClick={p.badge === "주의" ? onRenewal : undefined} className="w-full flex rounded-xl overflow-hidden text-left group" style={{ backgroundColor: p.bg }}>
+            <div className="w-1 shrink-0" style={{ backgroundColor: p.border }} />
+            <div className="flex-1 p-3 flex items-start justify-between">
+              <div>
+                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold text-white mb-1" style={{ backgroundColor: p.badgeBg }}>{p.badge}</span>
+                <p className="text-[12px] font-bold text-[#191F28]">{p.title}</p>
+                <p className="text-[11px] text-[#6B7684] mt-0.5">{p.detail}</p>
+              </div>
+              {p.badge === "주의" && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0 mt-1 text-[#B0B8C1] group-hover:text-[#3182F6] transition-colors"><path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+              )}
+            </div>
+          </button>
+        ))}
+      </div>
 
-      {/* 보험 진단 요약 */}
+      {/* 보험 진단 요약 (부분 모자이크) */}
       <p className="mt-5 text-[12px] font-bold text-[#6B7684]">보유 보험 5건 · 월 304,590원</p>
       <div className="mt-2 space-y-1.5">
-        {INSURANCE_LIST.map((ins) => (
-          <div key={ins.name} className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB]">
+        {INSURANCE_LIST.map((ins, i) => (
+          <div key={ins.name}
+            className={`flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB] transition-all duration-500 ${!revealed && i >= 2 ? "select-none" : ""}`}
+            style={{ filter: !revealed && i >= 2 ? "blur(3px)" : "none" }}>
             <div className="min-w-0"><p className="text-[10px] text-[#6B7684]">{ins.co}</p><p className="text-[12px] font-medium text-[#191F28] truncate">{ins.name}</p><p className="text-[10px] text-[#B0B8C1]">월 {ins.premium}원</p></div>
             <span className="shrink-0 ml-2 px-2 py-0.5 rounded text-[10px] font-bold" style={{ backgroundColor: ins.bg, color: ins.color }}>{ins.status}</span>
           </div>
         ))}
       </div>
 
-      {/* 우선순위 카드 */}
-      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">핵심 진단</p>
-      <div className="mt-2 space-y-2">
-        {PRIORITIES.map((p) => (
-          <button key={p.title} onClick={p.badge === "주의" ? onRenewal : undefined} className="w-full flex rounded-xl overflow-hidden text-left" style={{ backgroundColor: p.bg }}>
-            <div className="w-1 shrink-0" style={{ backgroundColor: p.border }} />
-            <div className="flex-1 p-3"><span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold text-white mb-1" style={{ backgroundColor: p.badgeBg }}>{p.badge}</span><p className="text-[12px] font-bold text-[#191F28]">{p.title}</p><p className="text-[11px] text-[#6B7684] mt-0.5">{p.detail}</p></div>
-          </button>
-        ))}
-      </div>
-
-      {/* 상세 분석 */}
-      <button onClick={onAnalysis} className={`mt-4 w-full p-3 rounded-xl text-left transition-all duration-500 ${revealed ? "bg-[#F9FAFB]" : "bg-[#F9FAFB]"}`} style={{ filter: revealed ? "none" : "blur(3px)" }}>
-        <p className="text-[12px] text-[#191F28]">보장 충족률, 중복 보장, 보장 공백 등</p>
+      {/* 상세 분석 (부분 모자이크) */}
+      <button onClick={onAnalysis} className="mt-4 w-full p-3 rounded-xl bg-[#F9FAFB] text-left relative overflow-hidden">
+        <div className={`transition-all duration-500 ${revealed ? "" : "select-none"}`} style={{ filter: revealed ? "none" : "blur(3px)" }}>
+          <p className="text-[12px] text-[#191F28]">보장 충족률: 암 54%, 뇌혈관 0%, 입원 85%</p>
+          <p className="text-[11px] text-[#6B7684] mt-0.5">중복 보장 2건 · 보장 공백 23년</p>
+        </div>
         <p className="text-[12px] font-bold text-[#3182F6] mt-1">상세 분석 보기 →</p>
       </button>
 
-      {/* CTA */}
+      {/* 숨은 보험금 (하단, 부분 모자이크) */}
+      <div className="mt-4 p-3 rounded-xl bg-[#E8F3FF]">
+        <p className="text-[11px] font-bold text-[#3182F6]">💰 숨은 보험금</p>
+        <p className="text-[20px] font-bold text-[#3182F6] mt-1">50만원</p>
+        {revealed ? (
+          <>
+            <p className="text-[11px] text-[#6B7684] mt-1">휴면보험금 32만원 + 만기보험금 18만원</p>
+            <KakaoButton />
+          </>
+        ) : (
+          <p className="text-[11px] text-[#6B7684] mt-1 select-none" style={{ filter: "blur(3px)" }}>휴면보험금 32만원 + 만기보험금 18만원 상세...</p>
+        )}
+      </div>
+
+      {/* CTA — 콘텐츠 흐름에 자연스럽게 */}
       {!revealed && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white px-5 py-3 z-10" style={{ position: "sticky" }}>
+        <div className="mt-5">
           <button onClick={onConsult} className="w-full h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">전체 분석 결과 보기</button>
           <p className="mt-1.5 text-[11px] text-[#B0B8C1] text-center">전체 결과를 보려면 상담 신청이 필요합니다</p>
         </div>
