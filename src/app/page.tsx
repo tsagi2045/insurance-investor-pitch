@@ -149,13 +149,6 @@ export default function Home() {
               className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8"
             >
               <DetailLink href="/what" />
-              <Link
-                href="/demo"
-                className="group inline-flex w-fit items-center gap-2 text-body text-white-40 transition-colors duration-300 hover:text-white-90"
-              >
-                데모 확인하기
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </Link>
             </motion.div>
           </div>
           <motion.div

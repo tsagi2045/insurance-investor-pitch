@@ -107,7 +107,7 @@ export default function HorizontalScroll({
       <div className="fixed right-6 bottom-8 z-50 lg:right-10 lg:bottom-10">
         <span className="text-caption tabular-nums tracking-wider text-white-40">
           {current + 1}
-          <span className="mx-1 text-white-10">/</span>
+          <span className="mx-1 text-white-40">/</span>
           {sectionCount}
         </span>
       </div>
