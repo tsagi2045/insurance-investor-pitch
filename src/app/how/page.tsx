@@ -11,7 +11,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 /* ─── Config ─── */
 const ease = [0.625, 0.05, 0, 1] as const;
-const SECTION_COUNT = 11;
+const SECTION_COUNT = 13;
 
 /* ─── Active Context ─── */
 const ActiveContext = createContext(false);
@@ -168,7 +168,7 @@ export default function HowPage() {
               </thead>
               <tbody>
                 {[
-                  { name: "보닥", vals: ["○", "×", "△", "×"] },
+                  { name: "보닥", vals: ["○", "×", "×", "×"] },
                   { name: "시그널플래너", vals: ["○", "×", "×", "×"] },
                   { name: "토스인슈어런스", vals: ["○", "×", "×", "×"] },
                   { name: "뱅크샐러드", vals: ["○", "×", "×", "×"] },
@@ -235,8 +235,41 @@ export default function HowPage() {
           </motion.p>
         </HowSection>
 
-        {/* ═══ S5: 인사이트 1 ═══ */}
+        {/* ═══ S5: 숨은 보험금 ═══ */}
         <HowSection index={4} center>
+          <motion.div variants={fadeUp}>
+            <CountUp target={50} suffix="만원" duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
+          </motion.div>
+          <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
+            고객 1인당 평균 숨은 보험금.
+            <br />
+            &ldquo;내 돈을 찾아준다&rdquo;는 경험만으로도 고객이 옵니다.
+          </motion.p>
+          <motion.p className="mt-6 text-caption text-white-40" variants={fadeUp}>
+            대한민국 휴면보험금 총 규모 약 12조원 (생보/손보협회)
+          </motion.p>
+        </HowSection>
+
+        {/* ═══ S6: 연금 AI ═══ */}
+        <HowSection index={5} center>
+          <motion.div variants={fadeUp}>
+            <CountUp target={115} suffix="조원" duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
+          </motion.div>
+          <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
+            연금저축보험 적립금 규모.
+            <br />
+            기가입 연금보험의 수익률을 AI로 진단하는
+            <br />
+            플랫폼은 아직 없습니다.
+          </motion.p>
+          <Source>
+            출처:{" "}
+            <SourceLink href="https://core.asiae.co.kr/article/2025073109421262910">아시아경제</SourceLink>{" "}(2025.07)
+          </Source>
+        </HowSection>
+
+        {/* ═══ S7: 인사이트 1 ═══ */}
+        <HowSection index={6} center>
           <motion.div className="mx-auto h-px w-12 bg-white-10" variants={fadeUp} />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             경쟁사가 모두
@@ -250,8 +283,8 @@ export default function HowPage() {
           <motion.div className="mx-auto mt-8 h-px w-12 bg-white-10" variants={fadeUp} />
         </HowSection>
 
-        {/* ═══ S6: Hero — 포인트 2 ═══ */}
-        <HowSection index={5} center>
+        {/* ═══ S8: Hero — 포인트 2 ═══ */}
+        <HowSection index={7} center>
           <SectionLabel label="POINT 2 · 새로운 팀" />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             기술이 있으면
@@ -260,8 +293,8 @@ export default function HowPage() {
           </motion.h2>
         </HowSection>
 
-        {/* ═══ S7: 생산성 숫자 ═══ */}
-        <HowSection index={6} center>
+        {/* ═══ S9: 생산성 숫자 ═══ */}
+        <HowSection index={8} center>
           <motion.div className="flex items-baseline justify-center gap-8" variants={fadeUp}>
             <div className="text-center">
               <p className="text-caption text-white-40">보닥</p>
@@ -295,8 +328,8 @@ export default function HowPage() {
           </Source>
         </HowSection>
 
-        {/* ═══ S8: 새로운 팀 ═══ */}
-        <HowSection index={7}>
+        {/* ═══ S10: 새로운 팀 ═══ */}
+        <HowSection index={9}>
           <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
             기존 FC가 아닌,
             <br />
@@ -315,8 +348,8 @@ export default function HowPage() {
           </motion.p>
         </HowSection>
 
-        {/* ═══ S9: 우리가 찾는 FC ═══ */}
-        <HowSection index={8}>
+        {/* ═══ S11: 우리가 찾는 FC ═══ */}
+        <HowSection index={10}>
           <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
             우리가 찾는 FC
           </motion.h2>
@@ -326,8 +359,8 @@ export default function HowPage() {
           </motion.ul>
         </HowSection>
 
-        {/* ═══ S10: 인사이트 2 ═══ */}
-        <HowSection index={9} center>
+        {/* ═══ S12: 인사이트 2 ═══ */}
+        <HowSection index={11} center>
           <motion.div className="mx-auto h-px w-12 bg-white-10" variants={fadeUp} />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             목돈으로 사람을 모으는
@@ -340,8 +373,8 @@ export default function HowPage() {
           <motion.div className="mx-auto mt-8 h-px w-12 bg-white-10" variants={fadeUp} />
         </HowSection>
 
-        {/* ═══ S11: CTA ═══ */}
-        <HowSection index={10} center>
+        {/* ═══ S13: CTA ═══ */}
+        <HowSection index={12} center>
           <motion.h2 className="text-display text-white-90" variants={fadeUp}>
             빈틈을 찾았고
             <br />
@@ -351,15 +384,13 @@ export default function HowPage() {
             아무도 보지 않던 시장의 기회,
             <br />
             그리고 그 시장을 공략할 사람들.
-            <br />
-            남은 건 하나 — 무엇을 만드는가.
           </motion.p>
           <motion.div className="mt-12" variants={fadeUp}>
             <Link
               href="/?s=2"
               className="inline-flex items-center gap-2 rounded-full border border-white-10 px-8 py-3 text-body font-medium text-white-90 transition-colors hover:border-white-40"
             >
-              What →
+              무엇을 만드는가 →
             </Link>
           </motion.div>
         </HowSection>
