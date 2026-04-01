@@ -174,16 +174,16 @@ export default function HowPage() {
                   { name: "뱅크샐러드", vals: ["○", "○", "×", "×"] },
                 ].map((row) => (
                   <tr key={row.name} className="border-t border-white-05">
-                    <td className="py-2.5 pr-2 text-white-40">{row.name}</td>
+                    <td className="py-1.5 pr-2 text-white-40">{row.name}</td>
                     {row.vals.map((v, i) => (
-                      <td key={i} className={`px-2 py-2.5 text-center ${v === "○" ? "text-white-40" : "text-white-40"}`}>{v}</td>
+                      <td key={i} className={`px-2 py-1.5 text-center ${v === "○" ? "text-white-40" : "text-white-40"}`}>{v}</td>
                     ))}
                   </tr>
                 ))}
                 <tr className="border-t border-white-10">
-                  <td className="py-2.5 pr-2 font-bold text-white-90">우리</td>
+                  <td className="py-1.5 pr-2 font-bold text-white-90">우리</td>
                   {["○", "○", "○", "○"].map((v, i) => (
-                    <td key={i} className="px-2 py-2.5 text-center font-bold text-white-90">{v}</td>
+                    <td key={i} className="px-2 py-1.5 text-center font-bold text-white-90">{v}</td>
                   ))}
                 </tr>
               </tbody>
