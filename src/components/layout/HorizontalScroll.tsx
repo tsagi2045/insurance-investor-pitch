@@ -13,14 +13,20 @@ export default function HorizontalScroll({
   children,
   sectionCount,
 }: HorizontalScrollProps) {
-  const [current, setCurrent] = useState(() => {
-    if (typeof window === "undefined") return 0;
-    const s = new URLSearchParams(window.location.search).get("s");
-    const n = s ? parseInt(s, 10) : 0;
-    return n >= 0 && n < sectionCount ? n : 0;
-  });
+  const [current, setCurrent] = useState(0);
   const isAnimating = useRef(false);
   const touchStartY = useRef(0);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+    const s = new URLSearchParams(window.location.search).get("s");
+    if (s) {
+      const n = parseInt(s, 10);
+      if (n > 0 && n < sectionCount) setCurrent(n);
+    }
+  }, [sectionCount]);
 
   const goTo = useCallback(
     (index: number) => {

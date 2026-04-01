@@ -176,7 +176,7 @@ export default function HowPage() {
                   <tr key={row.name} className="border-t border-white-05">
                     <td className="py-2.5 pr-2 text-white-40">{row.name}</td>
                     {row.vals.map((v, i) => (
-                      <td key={i} className={`px-2 py-2.5 text-center ${v === "○" ? "text-white-40" : v === "△" ? "text-white-40" : "text-white-10"}`}>{v}</td>
+                      <td key={i} className={`px-2 py-2.5 text-center ${v === "○" ? "text-white-40" : v === "△" ? "text-white-40" : "text-white-40 opacity-50"}`}>{v === "×" ? "—" : v}</td>
                     ))}
                   </tr>
                 ))}
@@ -197,8 +197,10 @@ export default function HowPage() {
         <HowSection index={2} center>
           <motion.div className="flex items-baseline justify-center gap-4" variants={fadeUp}>
             <span className="text-h2 tabular-nums text-white-40">월 2만원</span>
-            <span className="text-white-10">→</span>
-            <span className="text-h1 font-extrabold tabular-nums text-white-90">월 5.6만원</span>
+            <span className="text-h3 text-white-40">→</span>
+            <span className="text-h1 font-extrabold tabular-nums text-white-90">
+              월 <CountUp target={5.6} decimals={1} duration={2} className="text-h1 font-extrabold tabular-nums text-white-90" />만원
+            </span>
           </motion.div>
           <motion.p className="mt-6 max-w-md text-body leading-relaxed text-white-70" variants={fadeUp}>
             30대에 가입한 갱신형 암보험.
