@@ -366,7 +366,7 @@ export default function WhyPage() {
             수수료를 4~7년에 걸쳐 나눠 받는 분급제.
           </motion.p>
           <motion.div className="mt-10" variants={fadeUp}>
-            <p className="text-caption text-white-40">1차년도 수수료</p>
+            <p className="text-caption text-white-40">선지급 수수료</p>
             <p className="mt-3">
               <CountUp
                 target={37}
@@ -375,6 +375,9 @@ export default function WhyPage() {
                 className="text-display font-extrabold text-white-90"
               />
               <span className="ml-3 text-h2 text-white-40">감소</span>
+            </p>
+            <p className="mt-3 text-caption text-white-40">
+              1~2차년도 선지급 합계 2,000% → 1,250%
             </p>
           </motion.div>
           <motion.p
@@ -388,10 +391,13 @@ export default function WhyPage() {
           </motion.p>
           <Source>
             출처:{" "}
+            <SourceLink href="https://www.insjournal.co.kr/news/articleView.html?idxno=26829">
+              보험저널
+            </SourceLink>{" "}
+            (2025.05),{" "}
             <SourceLink href="https://www.fsc.go.kr/no010101/84721">
               금융위원회
-            </SourceLink>{" "}
-            (2024.12)
+            </SourceLink>
           </Source>
         </WhySection>
 
