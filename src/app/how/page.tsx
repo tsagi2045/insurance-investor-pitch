@@ -11,7 +11,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 /* ─── Config ─── */
 const ease = [0.625, 0.05, 0, 1] as const;
-const SECTION_COUNT = 13;
+const SECTION_COUNT = 12;
 
 /* ─── Active Context ─── */
 const ActiveContext = createContext(false);
@@ -235,23 +235,8 @@ export default function HowPage() {
           </motion.p>
         </HowSection>
 
-        {/* ═══ S5: 숨은 보험금 ═══ */}
+        {/* ═══ S5: 연금 AI ═══ */}
         <HowSection index={4} center>
-          <motion.div variants={fadeUp}>
-            <CountUp target={50} suffix="만원" duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
-          </motion.div>
-          <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
-            고객 1인당 평균 숨은 보험금.
-            <br />
-            &ldquo;내 돈을 찾아준다&rdquo;는 경험만으로도 고객이 옵니다.
-          </motion.p>
-          <motion.p className="mt-6 text-caption text-white-40" variants={fadeUp}>
-            대한민국 휴면보험금 총 규모 약 12조원 (생보/손보협회)
-          </motion.p>
-        </HowSection>
-
-        {/* ═══ S6: 연금 AI ═══ */}
-        <HowSection index={5} center>
           <motion.div variants={fadeUp}>
             <CountUp target={115} suffix="조원" duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
           </motion.div>
@@ -268,8 +253,8 @@ export default function HowPage() {
           </Source>
         </HowSection>
 
-        {/* ═══ S7: 인사이트 1 ═══ */}
-        <HowSection index={6} center>
+        {/* ═══ S6: 인사이트 1 ═══ */}
+        <HowSection index={5} center>
           <motion.div className="mx-auto h-px w-12 bg-white-10" variants={fadeUp} />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             경쟁사가 모두
@@ -283,8 +268,8 @@ export default function HowPage() {
           <motion.div className="mx-auto mt-8 h-px w-12 bg-white-10" variants={fadeUp} />
         </HowSection>
 
-        {/* ═══ S8: Hero — 포인트 2 ═══ */}
-        <HowSection index={7} center>
+        {/* ═══ S7: Hero — 포인트 2 ═══ */}
+        <HowSection index={6} center>
           <SectionLabel label="POINT 2 · 새로운 팀" />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             기술이 있으면
@@ -293,8 +278,8 @@ export default function HowPage() {
           </motion.h2>
         </HowSection>
 
-        {/* ═══ S9: 생산성 숫자 ═══ */}
-        <HowSection index={8} center>
+        {/* ═══ S8: 생산성 숫자 ═══ */}
+        <HowSection index={7} center>
           <motion.div className="flex items-baseline justify-center gap-8" variants={fadeUp}>
             <div className="text-center">
               <p className="text-caption text-white-40">보닥</p>
@@ -328,8 +313,8 @@ export default function HowPage() {
           </Source>
         </HowSection>
 
-        {/* ═══ S10: 새로운 팀 ═══ */}
-        <HowSection index={9}>
+        {/* ═══ S9: 새로운 팀 ═══ */}
+        <HowSection index={8}>
           <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
             기존 FC가 아닌,
             <br />
@@ -348,8 +333,8 @@ export default function HowPage() {
           </motion.p>
         </HowSection>
 
-        {/* ═══ S11: 우리가 찾는 FC ═══ */}
-        <HowSection index={10}>
+        {/* ═══ S10: 우리가 찾는 FC ═══ */}
+        <HowSection index={9}>
           <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
             우리가 찾는 FC
           </motion.h2>
@@ -359,8 +344,8 @@ export default function HowPage() {
           </motion.ul>
         </HowSection>
 
-        {/* ═══ S12: 인사이트 2 ═══ */}
-        <HowSection index={11} center>
+        {/* ═══ S11: 인사이트 2 ═══ */}
+        <HowSection index={10} center>
           <motion.div className="mx-auto h-px w-12 bg-white-10" variants={fadeUp} />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             목돈으로 사람을 모으는
@@ -373,8 +358,8 @@ export default function HowPage() {
           <motion.div className="mx-auto mt-8 h-px w-12 bg-white-10" variants={fadeUp} />
         </HowSection>
 
-        {/* ═══ S13: CTA ═══ */}
-        <HowSection index={12} center>
+        {/* ═══ S12: CTA ═══ */}
+        <HowSection index={11} center>
           <motion.h2 className="text-display text-white-90" variants={fadeUp}>
             빈틈을 찾았고
             <br />
