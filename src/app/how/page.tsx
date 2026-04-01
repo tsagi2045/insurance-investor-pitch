@@ -163,7 +163,7 @@ export default function HowPage() {
                   <th className="px-2 py-2 font-medium text-center">보장<br/>분석</th>
                   <th className="px-2 py-2 font-medium text-center">숨은<br/>보험금</th>
                   <th className="px-2 py-2 font-medium text-center">갱신형<br/>보험료 예측</th>
-                  <th className="px-2 py-2 font-medium text-center">연금보험<br/>AI 진단</th>
+                  <th className="px-2 py-2 font-medium text-center">연금<br/>현황 분석</th>
                 </tr>
               </thead>
               <tbody>
@@ -243,7 +243,7 @@ export default function HowPage() {
           <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
             연금저축보험 적립금 규모.
             <br />
-            기가입 연금보험의 수익률을 AI로 진단하는
+            고객의 연금이 노후에 충분한지 분석하는
             <br />
             플랫폼은 아직 없습니다.
           </motion.p>
