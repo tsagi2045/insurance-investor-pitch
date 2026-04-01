@@ -116,7 +116,15 @@ export default function WhatPage() {
           </span>
           메인으로
         </Link>
-        <span className="text-label tracking-[0.2em] text-white-40">WHAT</span>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/demo"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white-10 px-4 py-1.5 text-caption text-white-90 transition-colors hover:border-white-40"
+          >
+            데모 확인하기 →
+          </Link>
+          <span className="text-label tracking-[0.2em] text-white-40">WHAT</span>
+        </div>
       </motion.nav>
 
       {/* ─── Horizontal Scroll ─── */}

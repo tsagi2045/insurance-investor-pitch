@@ -503,7 +503,7 @@ export default function WhyPage() {
           </motion.p>
           <motion.div className="mt-12" variants={fadeUp}>
             <Link
-              href="/"
+              href="/?s=1"
               className="inline-flex items-center gap-2 rounded-full border border-white-10 px-8 py-3 text-body font-medium text-white-90 transition-colors hover:border-white-40"
             >
               어떻게 만드는가 →

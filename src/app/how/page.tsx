@@ -352,10 +352,10 @@ export default function HowPage() {
           </motion.h2>
           <motion.div className="mt-12" variants={fadeUp}>
             <Link
-              href="/what"
+              href="/?s=2"
               className="inline-flex items-center gap-2 rounded-full border border-white-10 px-8 py-3 text-body font-medium text-white-90 transition-colors hover:border-white-40"
             >
-              What →
+              무엇을 만드는가 →
             </Link>
           </motion.div>
         </HowSection>
