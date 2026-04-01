@@ -304,19 +304,15 @@ function StepDiagnosis({ revealed, showBanner, onConsult, onRenewal, onAnalysis 
         <p className="text-[12px] font-bold text-[#3182F6] mt-1">상세 분석 보기 →</p>
       </button>
 
-      {/* 숨은 보험금 (하단, 부분 모자이크) */}
-      <div className="mt-4 p-3 rounded-xl bg-[#E8F3FF]">
-        <p className="text-[11px] font-bold text-[#3182F6]">💰 숨은 보험금</p>
-        <p className="text-[20px] font-bold text-[#3182F6] mt-1">50만원</p>
-        {revealed ? (
-          <>
-            <p className="text-[11px] text-[#6B7684] mt-1">휴면보험금 32만원 + 만기보험금 18만원</p>
-            <KakaoButton />
-          </>
-        ) : (
-          <p className="text-[11px] text-[#6B7684] mt-1 select-none" style={{ filter: "blur(3px)" }}>휴면보험금 32만원 + 만기보험금 18만원 상세...</p>
-        )}
-      </div>
+      {/* 숨은 보험금 — revealed 후에만 표시 */}
+      {revealed && (
+        <div className="mt-4 p-3 rounded-xl bg-[#E8F3FF]">
+          <p className="text-[11px] font-bold text-[#3182F6]">💰 숨은 보험금 발견</p>
+          <p className="text-[20px] font-bold text-[#3182F6] mt-1">50만원</p>
+          <p className="text-[11px] text-[#6B7684] mt-1">휴면보험금 32만원 + 만기보험금 18만원</p>
+          <KakaoButton />
+        </div>
+      )}
 
       {/* CTA — 콘텐츠 흐름에 자연스럽게 */}
       {!revealed && (
