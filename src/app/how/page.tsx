@@ -342,22 +342,24 @@ export default function HowPage() {
 
         {/* ═══ S11: CTA ═══ */}
         <HowSection index={10} center>
-          <motion.p className="max-w-md text-body leading-relaxed text-white-70" variants={fadeUp}>
-            시장의 빈틈을 찾았습니다.
+          <motion.h2 className="text-display text-white-90" variants={fadeUp}>
+            빈틈을 찾았고
             <br />
-            팀을 만드는 방법도 알고 있습니다.
-          </motion.p>
-          <motion.h2 className="mt-6 text-display text-white-90" variants={fadeUp}>
-            그래서,
-            <br />
-            무엇을 만드는가?
+            팀도 준비됩니다
           </motion.h2>
+          <motion.p className="mx-auto mt-6 max-w-md text-body leading-relaxed text-white-70" variants={fadeUp}>
+            아무도 보지 않던 시장의 기회,
+            <br />
+            그리고 그 시장을 공략할 사람들.
+            <br />
+            남은 건 하나 — 무엇을 만드는가.
+          </motion.p>
           <motion.div className="mt-12" variants={fadeUp}>
             <Link
               href="/?s=2"
               className="inline-flex items-center gap-2 rounded-full border border-white-10 px-8 py-3 text-body font-medium text-white-90 transition-colors hover:border-white-40"
             >
-              무엇을 만드는가 →
+              What →
             </Link>
           </motion.div>
         </HowSection>
