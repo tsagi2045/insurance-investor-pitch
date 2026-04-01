@@ -34,9 +34,9 @@ export default function Home() {
               variants={fadeUp}
               className="text-display text-white-90"
             >
-              돈으로 설계사를 모으던
+              변화가
               <br />
-              시대가 끝나고 있습니다
+              시작됐다
             </motion.h1>
             <motion.p
               variants={fadeUp}
