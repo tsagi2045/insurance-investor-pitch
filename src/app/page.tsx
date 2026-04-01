@@ -34,15 +34,15 @@ export default function Home() {
               variants={fadeUp}
               className="text-display text-white-90"
             >
-              쓰나미가
+              돈으로 설계사를 모으던
               <br />
-              오고 있다
+              시대가 끝나고 있습니다
             </motion.h1>
             <motion.p
               variants={fadeUp}
               className="max-w-md text-body leading-relaxed text-white-70"
             >
-              2027년 분급제, 시장의 디지털 전환.
+              1200% 룰과 분급제.
               <br />
               기존 방식으로는 생존할 수 없습니다.
             </motion.p>
@@ -140,9 +140,9 @@ export default function Home() {
               variants={fadeUp}
               className="max-w-md text-body leading-relaxed text-white-70"
             >
-              단계별 로드맵, 절실한 인재,
+              30초 만에 내 보험을 진단받는 경험.
               <br />
-              고객과 설계사를 연결하는 구조.
+              AI가 분석하고, FC가 연결합니다.
             </motion.p>
             <motion.div
               variants={fadeUp}
