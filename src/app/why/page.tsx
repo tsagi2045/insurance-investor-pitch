@@ -11,7 +11,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 /* ─── Config ─── */
 const ease = [0.625, 0.05, 0, 1] as const;
-const SECTION_COUNT = 12;
+const SECTION_COUNT = 13;
 
 /* ─── Active Context ─── */
 const ActiveContext = createContext(false);
@@ -466,8 +466,41 @@ export default function WhyPage() {
           </Source>
         </WhySection>
 
-        {/* ═══ S11: 한국 예측 ═══ */}
-        <WhySection index={10}>
+        {/* ═══ S11: 소수 정예 집중 ═══ */}
+        <WhySection index={10} center>
+          <motion.div
+            className="mt-4 flex items-baseline justify-center gap-3"
+            variants={fadeUp}
+          >
+            <CountUp
+              target={493}
+              suffix="명"
+              duration={2.5}
+              className="text-display font-extrabold tabular-nums text-white-90"
+            />
+          </motion.div>
+          <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
+            이 신규 생명보험 계약의 절반을 작성합니다.
+          </motion.p>
+          <motion.p
+            className="mt-6 text-body leading-relaxed text-white-40"
+            variants={fadeUp}
+          >
+            전체 15,634명 중 단 3.2%.
+            <br />
+            기술을 결합한 소수가 시장을 지배합니다.
+          </motion.p>
+          <Source>
+            출처:{" "}
+            <SourceLink href="https://www.adviserratings.com.au/news/only-493-advisers-have-written-50-of-australia-s-life-policies-in-2023/">
+              Adviser Ratings
+            </SourceLink>{" "}
+            (2023)
+          </Source>
+        </WhySection>
+
+        {/* ═══ S12: 한국 예측 ═══ */}
+        <WhySection index={11}>
           <SectionLabel label="한국 시장 전망" />
           <motion.h2 className="mt-6 text-h2 text-white-90" variants={fadeUp}>
             한국도 같은 길을 갑니다
@@ -492,8 +525,8 @@ export default function WhyPage() {
           </Source>
         </WhySection>
 
-        {/* ═══ S12: 결론 + CTA ═══ */}
-        <WhySection index={11} center>
+        {/* ═══ S13: 결론 + CTA ═══ */}
+        <WhySection index={12} center>
           <motion.h2 className="text-display text-white-90" variants={fadeUp}>
             기술을 가진 곳만
             <br />
