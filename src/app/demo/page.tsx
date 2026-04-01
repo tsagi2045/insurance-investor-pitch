@@ -89,6 +89,11 @@ function BottomSheet({ isOpen, onClose, title, children }: { isOpen: boolean; on
   );
 }
 
+/* ═══ BLUR NUMBER ═══ */
+function B({ v, r }: { v: string; r: boolean }) {
+  return <span className={`transition-all duration-700 inline-block ${r ? "" : "blur-[6px] select-none"}`}>{v}</span>;
+}
+
 function Check({ on, small }: { on: boolean; small?: boolean }) {
   const s = small ? "w-[18px] h-[18px]" : "w-[22px] h-[22px]";
   return <div className={`${s} rounded-full flex items-center justify-center shrink-0 transition-colors ${on ? "bg-[#3182F6]" : "bg-[#D1D6DB]"}`}>{on && <svg width={small ? 9 : 11} height={small ? 7 : 8} viewBox="0 0 14 10" fill="none"><path d="M1 5L5 9L13 1" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}</div>;
@@ -240,8 +245,9 @@ function StepLoading({ onNext }: { onNext: () => void }) {
 
 /* ═══ STEP 5: DIAGNOSIS ═══ */
 function StepDiagnosis({ revealed, showBanner, onConsult, onRenewal, onAnalysis }: { revealed: boolean; showBanner: boolean; onConsult: () => void; onRenewal: () => void; onAnalysis: () => void }) {
+  const r = revealed;
   return (
-    <div className="h-full flex flex-col overflow-y-auto px-5 pt-3 pb-6" style={{ WebkitOverflowScrolling: "touch" }}>
+    <div className="h-full flex flex-col overflow-y-auto px-5 pt-3 pb-20" style={{ WebkitOverflowScrolling: "touch" }}>
       {/* 배너 */}
       {showBanner && (
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-3 p-2.5 rounded-xl bg-[#E8F8EE] flex items-center gap-2">
@@ -262,60 +268,98 @@ function StepDiagnosis({ revealed, showBanner, onConsult, onRenewal, onAnalysis 
         <div><p className="text-[14px] font-bold text-[#191F28]">보장지수 46%</p><p className="text-[11px] text-[#6B7684]">부족 7 · 우수 15 · 미가입 19</p></div>
       </div>
 
-      {/* 핵심 진단 (공개, 상단 배치) */}
+      {/* 판정 요약 */}
+      <div className="mt-4 flex items-center gap-3">
+        {[{ label: "유지", count: 2, color: "#30B050" }, { label: "조정", count: 2, color: "#FFC34E" }, { label: "주의", count: 1, color: "#3182F6" }].map((s) => (
+          <div key={s.label} className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.color }} />
+            <span className="text-[11px] text-[#6B7684]">{s.label} {s.count}건</span>
+          </div>
+        ))}
+      </div>
+
+      {/* 우선순위 카드 — 제목 공개, 금액만 blur */}
       <p className="mt-5 text-[12px] font-bold text-[#6B7684]">핵심 진단</p>
       <div className="mt-2 space-y-2">
-        {PRIORITIES.map((p) => (
-          <button key={p.title} onClick={p.badge === "주의" ? onRenewal : undefined} className="w-full flex rounded-xl overflow-hidden text-left group" style={{ backgroundColor: p.bg }}>
+        {[
+          { title: "암 보장", amount: "1,300만원", suffix: " 부족", detail: "30대 위암 진료비 vs 현재 보장", badge: "시급", bg: "#FEF2F2", border: "#F04452", badgeBg: "#F04452" },
+          { title: "실손보험 2건 중복", amount: "3만원", suffix: " 절약", detail: "1건 정리 시", badge: "절약", bg: "#FFF8E8", border: "#FFC34E", badgeBg: "#FFC34E" },
+          { title: "갱신형 보험료", amount: "2.3배", suffix: " 상승", detail: "50세 기준 비갱신형 전환 검토", badge: "주의", bg: "#E8F3FF", border: "#3182F6", badgeBg: "#3182F6", clickable: true },
+        ].map((p) => (
+          <button key={p.title} onClick={p.clickable ? onRenewal : undefined} className="w-full flex rounded-2xl overflow-hidden text-left group shadow-sm" style={{ backgroundColor: p.bg }}>
             <div className="w-1 shrink-0" style={{ backgroundColor: p.border }} />
             <div className="flex-1 p-3 flex items-start justify-between">
               <div>
-                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold text-white mb-1" style={{ backgroundColor: p.badgeBg }}>{p.badge}</span>
-                <p className="text-[12px] font-bold text-[#191F28]">{p.title}</p>
+                <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold text-white mb-1.5" style={{ backgroundColor: p.badgeBg }}>{p.badge}</span>
+                <p className="text-[12px] font-bold text-[#191F28]">{p.title} <B v={p.amount} r={r} />{p.suffix}</p>
                 <p className="text-[11px] text-[#6B7684] mt-0.5">{p.detail}</p>
               </div>
-              {p.badge === "주의" && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0 mt-1 text-[#B0B8C1] group-hover:text-[#3182F6] transition-colors"><path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
-              )}
+              {p.clickable && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0 mt-1 text-[#B0B8C1] group-hover:text-[#3182F6] transition-colors"><path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>}
             </div>
           </button>
         ))}
       </div>
 
-      {/* 보험 진단 요약 (부분 모자이크) */}
-      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">보유 보험 5건 · 월 304,590원</p>
+      {/* 보험 목록 — 상품명+상태 공개, 보험료만 blur */}
+      <p className="mt-5 text-[12px] font-bold text-[#6B7684]">보유 보험 5건</p>
       <div className="mt-2 space-y-1.5">
-        {INSURANCE_LIST.map((ins, i) => (
-          <div key={ins.name}
-            className={`flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB] transition-all duration-500 ${!revealed && i >= 2 ? "select-none" : ""}`}
-            style={{ filter: !revealed && i >= 2 ? "blur(3px)" : "none" }}>
-            <div className="min-w-0"><p className="text-[10px] text-[#6B7684]">{ins.co}</p><p className="text-[12px] font-medium text-[#191F28] truncate">{ins.name}</p><p className="text-[10px] text-[#B0B8C1]">월 {ins.premium}원</p></div>
-            <span className="shrink-0 ml-2 px-2 py-0.5 rounded text-[10px] font-bold" style={{ backgroundColor: ins.bg, color: ins.color }}>{ins.status}</span>
+        {INSURANCE_LIST.map((ins) => (
+          <div key={ins.name} className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB]">
+            <div className="min-w-0 flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-[#F2F4F6] flex items-center justify-center shrink-0">
+                <span className="text-[8px] font-bold text-[#6B7684]">{ins.co.slice(0, 2)}</span>
+              </div>
+              <div>
+                <p className="text-[12px] font-medium text-[#191F28] truncate">{ins.name}</p>
+                <p className="text-[10px] text-[#B0B8C1]">월 <B v={ins.premium} r={r} />원</p>
+              </div>
+            </div>
+            <span className="shrink-0 ml-2 px-2 py-0.5 rounded-lg text-[10px] font-bold" style={{ backgroundColor: ins.bg, color: ins.color }}>{ins.status}</span>
           </div>
         ))}
       </div>
 
-      {/* 상세 분석 (부분 모자이크) */}
-      <button onClick={onAnalysis} className="mt-4 w-full p-3 rounded-xl bg-[#F9FAFB] text-left relative overflow-hidden">
-        <div className={`transition-all duration-500 ${revealed ? "" : "select-none"}`} style={{ filter: revealed ? "none" : "blur(3px)" }}>
-          <p className="text-[12px] text-[#191F28]">보장 충족률: 암 54%, 뇌혈관 0%, 입원 85%</p>
-          <p className="text-[11px] text-[#6B7684] mt-0.5">중복 보장 2건 · 보장 공백 23년</p>
-        </div>
-        <p className="text-[12px] font-bold text-[#3182F6] mt-1">상세 분석 보기 →</p>
-      </button>
+      {/* 숨은 보험금 — 있다는 사실은 공개, 금액은 blur */}
+      <div className="mt-4 p-3 rounded-xl bg-[#E8F3FF]">
+        <p className="text-[11px] font-bold text-[#3182F6]">💰 숨은 보험금이 발견되었습니다</p>
+        <p className="text-[18px] font-bold text-[#3182F6] mt-1"><B v="50만원" r={r} /></p>
+        {r && (
+          <>
+            <p className="text-[11px] text-[#6B7684] mt-1">휴면보험금 32만원 + 만기보험금 18만원</p>
+            <KakaoButton />
+          </>
+        )}
+      </div>
 
-      {/* 숨은 보험금 — revealed 후에만 표시 */}
-      {revealed && (
-        <div className="mt-4 p-3 rounded-xl bg-[#E8F3FF]">
-          <p className="text-[11px] font-bold text-[#3182F6]">💰 숨은 보험금 발견</p>
-          <p className="text-[20px] font-bold text-[#3182F6] mt-1">50만원</p>
-          <p className="text-[11px] text-[#6B7684] mt-1">휴면보험금 32만원 + 만기보험금 18만원</p>
-          <KakaoButton />
-        </div>
-      )}
+      {/* Detour 버튼 */}
+      <div className="mt-4 space-y-2">
+        <button onClick={onAnalysis} className="w-full p-3 rounded-xl bg-[#F9FAFB] text-left flex items-center justify-between">
+          <div>
+            <p className="text-[12px] text-[#191F28]">보장 충족률, 중복 보장, 보장 공백</p>
+            <p className="text-[11px] text-[#6B7684] mt-0.5">충족률: 암 <B v="54%" r={r} /> · 뇌혈관 <B v="0%" r={r} /></p>
+          </div>
+          <span className="text-[12px] font-bold text-[#3182F6] shrink-0 ml-2">상세 →</span>
+        </button>
+        <button onClick={onRenewal} className="w-full p-3 rounded-xl bg-[#F9FAFB] text-left flex items-center justify-between">
+          <div>
+            <p className="text-[12px] text-[#191F28]">갱신형 보험료 예측</p>
+            <p className="text-[11px] text-[#6B7684] mt-0.5">연평균 <B v="9%" r={r} /> 인상 시 30년 후 예측</p>
+          </div>
+          <span className="text-[12px] font-bold text-[#3182F6] shrink-0 ml-2">보기 →</span>
+        </button>
+      </div>
 
-      {/* CTA — 콘텐츠 흐름에 자연스럽게 */}
-      {!revealed && (
+      {/* 액션 플랜 */}
+      <div className="mt-4 p-3 rounded-xl bg-[#F9FAFB]">
+        <p className="text-[12px] font-bold text-[#191F28]">✓ 지금 할 수 있는 것</p>
+        <p className="text-[11px] text-[#6B7684] mt-1">• 실손보험 중복 정리 → 월 <B v="3만원" r={r} /> 절약</p>
+        <p className="text-[12px] font-bold text-[#191F28] mt-3">💡 FC와 상의할 것</p>
+        <p className="text-[11px] text-[#6B7684] mt-1">• 암 진단비 <B v="1,300만원" r={r} /> 보충</p>
+        <p className="text-[11px] text-[#6B7684]">• 갱신형 → 비갱신형 전환 검토</p>
+      </div>
+
+      {/* CTA */}
+      {!r && (
         <div className="mt-5">
           <button onClick={onConsult} className="w-full h-[48px] bg-[#3182F6] text-white text-[15px] font-bold rounded-2xl active:scale-[0.98] transition-transform">전체 분석 결과 보기</button>
           <p className="mt-1.5 text-[11px] text-[#B0B8C1] text-center">전체 결과를 보려면 상담 신청이 필요합니다</p>
@@ -371,11 +415,17 @@ function StepAnalysis({ revealed, onBack, onRenewal }: { revealed: boolean; onBa
 
 /* ═══ STEP 6: RENEWAL ═══ */
 function StepRenewal({ onBack }: { onBack: () => void }) {
-  const data = [{ age: "현재\n35세", amount: "2만원", height: 50, color: "#30B050" },{ age: "10년 후\n45세", amount: "5.6만원", height: 120, color: "#FFC34E" },{ age: "20년 후\n55세", amount: "12만원", height: 210, color: "#FF8C00" },{ age: "30년 후\n65세", amount: "30만원+", height: 300, color: "#F04452" }];
+  const data = [
+    { age: "현재\n35세", amount: "2만원", height: 40, color: "rgba(255,255,255,0.9)" },
+    { age: "10년 후\n45세", amount: "4.7만원", height: 100, color: "rgba(255,255,255,0.6)" },
+    { age: "20년 후\n55세", amount: "11만원", height: 190, color: "rgba(255,255,255,0.4)" },
+    { age: "30년 후\n65세", amount: "27만원", height: 300, color: "#F04452" },
+  ];
   return (
-    <div className="h-full flex flex-col px-5 pt-3 pb-5">
-      <button onClick={onBack} className="flex items-center gap-1 text-[13px] text-[#6B7684] mb-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>돌아가기</button>
-      <h2 className="text-[18px] font-bold text-[#191F28]">갱신형 보험료 예측</h2><p className="mt-1 text-[12px] text-[#6B7684]">현재 갱신형 보험 기준</p>
+    <div className="h-full flex flex-col px-5 pt-3 pb-5 bg-[#191F28]">
+      <button onClick={onBack} className="flex items-center gap-1 text-[13px] text-[#B0B8C1] mb-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>돌아가기</button>
+      <h2 className="text-[18px] font-bold text-white">갱신형 보험료 예측</h2>
+      <p className="mt-1 text-[12px] text-[#6B7684]">연평균 인상률 9% 기준</p>
       <div className="mt-6 flex-1 flex items-end justify-center gap-4 pb-2">
         {data.map((d, i) => (
           <div key={d.age} className="flex flex-col items-center gap-2 flex-1">
@@ -385,7 +435,8 @@ function StepRenewal({ onBack }: { onBack: () => void }) {
           </div>
         ))}
       </div>
-      <div className="mt-4 p-3 rounded-xl bg-[#FEF2F2]"><p className="text-[13px] text-[#333D4B] leading-relaxed text-center">은퇴 후 소득은 줄어드는데<br />보험료는 <span className="font-bold text-[#F04452]">15배</span> 올라갑니다</p></div>
+      <div className="mt-4 p-3 rounded-xl bg-white/5"><p className="text-[13px] text-[#B0B8C1] leading-relaxed text-center">은퇴 후 소득은 줄어드는데<br />보험료는 <span className="font-bold text-[#F04452]">13배</span> 올라갑니다</p></div>
+      <p className="mt-2 text-[10px] text-[#6B7684] text-center">출처: 보험저널 / 금융위원회 (2025)</p>
     </div>
   );
 }
