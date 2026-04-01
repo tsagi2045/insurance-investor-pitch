@@ -265,10 +265,10 @@ export default function WhatPage() {
             className="mt-6 max-w-lg text-body leading-relaxed text-white-70"
             variants={fadeUp}
           >
-            보장지수, 숨은 보험금 금액은{" "}
+            보장지수, 핵심 진단 항목은{" "}
             <span className="font-bold text-white-90">즉시 공개</span>.
             <br />
-            담보별 부족 금액, 갱신 예측 그래프, 청구 방법은{" "}
+            구체적인 부족 금액, 액션 플랜은{" "}
             <span className="font-bold text-white-90">모자이크 처리</span>.
           </motion.p>
           <motion.p
@@ -302,9 +302,9 @@ export default function WhatPage() {
             className="mt-8 max-w-lg text-body leading-relaxed text-white-70"
             variants={fadeUp}
           >
-            FC는 DB를 사지 않아도 됩니다.
+            플랫폼이 고객을 모아, 분석까지 끝내고, FC에게 전달합니다.
             <br />
-            플랫폼이 고객을 모아, 분석까지 끝내고, FC에게 보냅니다.
+            FC의 DB 비용 부담을 줄이는 구조입니다.
           </motion.p>
         </WhatSection>
 
