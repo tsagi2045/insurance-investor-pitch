@@ -408,7 +408,6 @@ function StepAnalysis({ revealed, onBack, onRenewal }: { revealed: boolean; onBa
         <div className="mt-2 p-3 rounded-xl bg-[#FEF2F2]"><p className="text-[12px] text-[#191F28]">기대수명 <span className="font-bold">83세</span> vs 보험 만기 <span className="font-bold">60세</span></p><p className="text-[11px] text-[#F04452] mt-0.5 font-bold">23년 무보장 기간</p></div>
       </div>
 
-      <button onClick={onRenewal} className="mt-4 w-full p-3 rounded-xl bg-[#E8F3FF] text-left"><p className="text-[12px] font-bold text-[#3182F6]">갱신 예측 상세 보기 →</p></button>
     </div>
   );
 }
