@@ -224,7 +224,7 @@ export default function WhatPage() {
         {/* ═══ S4: 숨은 보험금 ═══ */}
         <WhatSection index={3} center>
           <motion.p className="text-body text-white-40" variants={fadeUp}>
-            아직 찾아가지 않은
+            아직 찾아가지 않은 숨은 보험금
           </motion.p>
           <motion.div className="mt-4" variants={fadeUp}>
             <CountUp
@@ -257,7 +257,11 @@ export default function WhatPage() {
             className="mt-8 text-caption text-white-40"
             variants={fadeUp}
           >
-            출처: 금융위원회 보도자료 (2025)
+            출처:{" "}
+            <a href="https://fsc.go.kr/edu/news/84846" target="_blank" rel="noopener noreferrer" className="underline decoration-white-10 underline-offset-2 transition-colors hover:text-white-70">
+              금융위원회 보도자료
+            </a>{" "}
+            (2025)
           </motion.p>
         </WhatSection>
 
