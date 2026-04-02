@@ -589,6 +589,10 @@ export default function DemoPage() {
         </div>
       </div>
       <div className="shrink-0 lg:hidden flex items-center justify-center gap-1.5 pb-4">
+        {step > 0 && (
+          <button onClick={() => { setDetour(null); setRevealed(false); setShowBanner(false); goTo(0); }}
+            className="mr-2 text-[11px] text-white-40 active:text-white-90">← 처음</button>
+        )}
         {STEPS.map((_,i) => <button key={i} onClick={() => { setDetour(null); goTo(i); }} className={`w-2 h-2 rounded-full transition-all ${i === step ? "bg-white-90 w-5" : i < step ? "bg-white-40" : "bg-white-10"}`} />)}
       </div>
     </div>
