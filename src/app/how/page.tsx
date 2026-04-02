@@ -11,7 +11,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 /* ─── Config ─── */
 const ease = [0.625, 0.05, 0, 1] as const;
-const SECTION_COUNT = 12;
+const SECTION_COUNT = 14;
 
 /* ─── Active Context ─── */
 const ActiveContext = createContext(false);
@@ -196,25 +196,25 @@ export default function HowPage() {
         {/* ═══ S3: 갱신 예측 숫자 ═══ */}
         <HowSection index={2} center>
           <motion.div className="flex items-baseline justify-center gap-4" variants={fadeUp}>
-            <span className="text-h2 tabular-nums text-white-40">연 47,000원</span>
+            <span className="text-h2 tabular-nums text-white-40">월 28,560원</span>
             <span className="text-h3 text-white-40">→</span>
             <span className="text-h1 font-extrabold tabular-nums text-white-90">
-              연 <CountUp target={134} duration={2} className="text-h1 font-extrabold tabular-nums text-white-90" />,000원
+              월 <CountUp target={60} duration={2} className="text-h1 font-extrabold tabular-nums text-white-90" />,720원
             </span>
           </motion.div>
           <motion.p className="mt-6 max-w-md text-body leading-relaxed text-white-70" variants={fadeUp}>
-            1세대 실손보험 갱신 사례.
+            갱신형 암보험, 10년 후 첫 갱신.
             <br />
-            예상 인상률 15~17%였지만, 실제 청구액은 약 2.8배.
+            예상하지 못한 112% 인상.
             <br />
-            이런 괴리를 미리 보여주는 서비스는 아직 없습니다.
+            비갱신형이었다면 보험료는 그대로였습니다.
           </motion.p>
           <Source>
             출처:{" "}
-            <SourceLink href="https://www.hankookilbo.com/news/article/A2021022515400001308">
-              한국일보
+            <SourceLink href="https://www.insnews.co.kr/news/articleViewRedirect.html?hot=78447/Y&firstsec=1&secondsec=12&num=78447">
+              한국보험신문
             </SourceLink>{" "}
-            (2021.02)
+            (2024.04)
           </Source>
         </HowSection>
 
@@ -253,8 +253,52 @@ export default function HowPage() {
           </Source>
         </HowSection>
 
-        {/* ═══ S6: 인사이트 1 ═══ */}
+        {/* ═══ S6: 연금 가입률 ═══ */}
         <HowSection index={5} center>
+          <motion.p className="text-body text-white-40" variants={fadeUp}>
+            경제활동인구 중 연금저축 가입률
+          </motion.p>
+          <motion.div className="mt-4" variants={fadeUp}>
+            <CountUp target={26} suffix="%" duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
+          </motion.div>
+          <motion.p className="mt-6 text-body leading-relaxed text-white-70" variants={fadeUp}>
+            764만 명만 가입. 나머지 74%는 미가입.
+            <br />
+            국민연금 사각지대만 998만 명.
+          </motion.p>
+          <motion.p className="mt-4 text-body leading-relaxed text-white-40" variants={fadeUp}>
+            내 연금이 노후에 충분한지
+            <br />
+            분석해주는 서비스는 아직 없습니다.
+          </motion.p>
+          <Source>
+            출처:{" "}
+            <SourceLink href="https://www.segye.com/newsView/20250731515864">세계일보</SourceLink>{" "}(2025.07),{" "}
+            <SourceLink href="https://www.korea.kr/news/policyNewsView.do?newsId=156721761">정책브리핑</SourceLink>{" "}(2024)
+          </Source>
+        </HowSection>
+
+        {/* ═══ S7: 노인 빈곤율 ═══ */}
+        <HowSection index={6} center>
+          <motion.p className="text-body text-white-40" variants={fadeUp}>
+            한국 노인 빈곤율
+          </motion.p>
+          <motion.div className="mt-4" variants={fadeUp}>
+            <CountUp target={39.7} suffix="%" decimals={1} duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
+          </motion.div>
+          <motion.p className="mt-6 text-body leading-relaxed text-white-70" variants={fadeUp}>
+            OECD 평균 14.8%의 2.5배. 압도적 1위.
+            <br />
+            연금 시스템이 작동하지 않고 있다는 증거입니다.
+          </motion.p>
+          <Source>
+            출처:{" "}
+            <SourceLink href="https://alphabiz.co.kr/news/view/1065593449217702">알파비즈</SourceLink>{" "}(2025)
+          </Source>
+        </HowSection>
+
+        {/* ═══ S8: 인사이트 1 ═══ */}
+        <HowSection index={7} center>
           <motion.div className="mx-auto h-px w-12 bg-white-10" variants={fadeUp} />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             경쟁사가 모두
@@ -268,8 +312,8 @@ export default function HowPage() {
           <motion.div className="mx-auto mt-8 h-px w-12 bg-white-10" variants={fadeUp} />
         </HowSection>
 
-        {/* ═══ S7: Hero — 포인트 2 ═══ */}
-        <HowSection index={6} center>
+        {/* ═══ S9: Hero — 포인트 2 ═══ */}
+        <HowSection index={8} center>
           <SectionLabel label="POINT 2 · 새로운 팀" />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             기술이 있으면
@@ -278,8 +322,8 @@ export default function HowPage() {
           </motion.h2>
         </HowSection>
 
-        {/* ═══ S8: 생산성 숫자 ═══ */}
-        <HowSection index={7} center>
+        {/* ═══ S10: 생산성 숫자 ═══ */}
+        <HowSection index={9} center>
           <motion.div className="flex items-baseline justify-center gap-8" variants={fadeUp}>
             <div className="text-center">
               <p className="text-caption text-white-40">보닥</p>
@@ -313,8 +357,8 @@ export default function HowPage() {
           </Source>
         </HowSection>
 
-        {/* ═══ S9: 새로운 팀 ═══ */}
-        <HowSection index={8}>
+        {/* ═══ S11: 새로운 팀 ═══ */}
+        <HowSection index={10}>
           <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
             기존 FC가 아닌,
             <br />
@@ -333,8 +377,8 @@ export default function HowPage() {
           </motion.p>
         </HowSection>
 
-        {/* ═══ S10: 우리가 찾는 FC ═══ */}
-        <HowSection index={9}>
+        {/* ═══ S12: 우리가 찾는 FC ═══ */}
+        <HowSection index={11}>
           <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
             우리가 찾는 FC
           </motion.h2>
@@ -344,8 +388,8 @@ export default function HowPage() {
           </motion.ul>
         </HowSection>
 
-        {/* ═══ S11: 인사이트 2 ═══ */}
-        <HowSection index={10} center>
+        {/* ═══ S13: 인사이트 2 ═══ */}
+        <HowSection index={12} center>
           <motion.div className="mx-auto h-px w-12 bg-white-10" variants={fadeUp} />
           <motion.h2 className="mt-8 text-h1 text-white-90" variants={fadeUp}>
             목돈으로 사람을 모으는
@@ -358,8 +402,8 @@ export default function HowPage() {
           <motion.div className="mx-auto mt-8 h-px w-12 bg-white-10" variants={fadeUp} />
         </HowSection>
 
-        {/* ═══ S12: CTA ═══ */}
-        <HowSection index={11} center>
+        {/* ═══ S14: CTA ═══ */}
+        <HowSection index={13} center>
           <motion.h2 className="text-display text-white-90" variants={fadeUp}>
             빈틈을 찾았고
             <br />

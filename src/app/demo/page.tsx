@@ -174,7 +174,7 @@ function StepLogin({ onNext }: { onNext: () => void }) {
           className="h-full flex flex-col px-6 pt-10">
           <div className="flex items-center gap-3 mb-1">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: bg }}>
-              {kakaoIcon}
+              {isKakao ? kakaoIcon : <span className="text-[16px] font-black text-white">N</span>}
             </div>
             <div>
               <p className="text-[16px] font-bold text-[#191F28]">보험분석 서비스</p>
@@ -245,35 +245,71 @@ function StepConsent({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ═══ STEP 3: VERIFY (3-Phase) ═══ */
+/* ═══ STEP 3: VERIFY (4-Phase) ═══ */
 function StepVerify({ onNext }: { onNext: () => void }) {
-  const [phase, setPhase] = useState<"requesting" | "confirm" | "complete">("requesting");
+  const [phase, setPhase] = useState<"select" | "requesting" | "confirm" | "complete">("select");
+  const [verifyProvider, setVerifyProvider] = useState<"kakao" | "naver">("kakao");
   useEffect(() => { if (phase !== "requesting") return; const t = setTimeout(() => setPhase("confirm"), 1500); return () => clearTimeout(t); }, [phase]);
   useEffect(() => { if (phase !== "complete") return; const t = setTimeout(onNext, 1000); return () => clearTimeout(t); }, [phase, onNext]);
+  const vIsKakao = verifyProvider === "kakao";
+  const vBg = vIsKakao ? "#FEE500" : "#03C75A";
+  const vTxt = vIsKakao ? "#191919" : "#FFFFFF";
+  const vName = vIsKakao ? "카카오톡" : "네이버";
 
   return (
     <div className="h-full flex flex-col bg-white relative overflow-hidden">
       <AnimatePresence mode="wait">
+        {phase === "select" && (
+          <motion.div key="sel" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}
+            className="h-full flex flex-col px-5 pt-4">
+            <p className="text-[12px] text-[#6B7684]">본인인증</p>
+            <h2 className="mt-2 text-[20px] font-bold text-[#191F28] leading-tight">보험 조회를 위해<br />본인인증이 필요해요</h2>
+            <p className="mt-2 text-[13px] text-[#6B7684]">간편인증으로 빠르게 본인 확인을 진행합니다</p>
+            <div className="mt-6 space-y-3">
+              <button onClick={() => { setVerifyProvider("kakao"); setPhase("requesting"); }}
+                className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#F9FAFB] active:scale-[0.98] transition-transform">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#FEE500" }}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg>
+                </div>
+                <div className="flex-1 text-left"><p className="text-[14px] font-bold text-[#191F28]">카카오톡 인증</p><p className="text-[12px] text-[#6B7684]">카카오톡 앱에서 확인</p></div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#B0B8C1" strokeWidth="2" strokeLinecap="round"/></svg>
+              </button>
+              <button onClick={() => { setVerifyProvider("naver"); setPhase("requesting"); }}
+                className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#F9FAFB] active:scale-[0.98] transition-transform">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#03C75A" }}>
+                  <span className="text-[18px] font-black text-white">N</span>
+                </div>
+                <div className="flex-1 text-left"><p className="text-[14px] font-bold text-[#191F28]">네이버 인증</p><p className="text-[12px] text-[#6B7684]">네이버 앱에서 확인</p></div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#B0B8C1" strokeWidth="2" strokeLinecap="round"/></svg>
+              </button>
+            </div>
+            <p className="mt-6 text-[11px] text-[#B0B8C1] text-center">인증 정보는 보험 조회에만 사용되며 안전하게 처리됩니다</p>
+          </motion.div>
+        )}
         {phase === "requesting" && (
-          <motion.div key="req" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-full flex flex-col items-center justify-center px-8">
+          <motion.div key="req" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }} className="h-full flex flex-col items-center justify-center px-8">
             <div className="relative w-16 h-16 mb-6">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: "#FEE500" }}><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg></div>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: vBg }}>
+                {vIsKakao ? <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg> : <span className="text-[24px] font-black text-white">N</span>}
+              </div>
               <div className="absolute -inset-1 rounded-full border-[3px] border-transparent border-t-[#3182F6] animate-spin" />
             </div>
             <p className="text-[18px] font-bold text-[#191F28] mb-2">인증 요청을 보냈습니다</p>
-            <p className="text-[14px] text-[#6B7684] text-center">카카오톡 앱에서 확인해 주세요</p>
-            <div className="mt-8 bg-[#F9FAFB] rounded-2xl p-4 w-full"><div className="flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="#4E5968" strokeWidth="1.5"/><circle cx="12" cy="18" r="1" fill="#4E5968"/></svg></div><div><p className="text-[13px] font-semibold text-[#191F28]">카카오톡 앱 알림 확인</p><p className="text-[11px] text-[#6B7684] mt-0.5">앱에서 인증 요청을 확인하고 승인해 주세요</p></div></div></div>
+            <p className="text-[14px] text-[#6B7684] text-center">{vName} 앱에서 확인해 주세요</p>
+            <div className="mt-8 bg-[#F9FAFB] rounded-2xl p-4 w-full"><div className="flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="#4E5968" strokeWidth="1.5"/><circle cx="12" cy="18" r="1" fill="#4E5968"/></svg></div><div><p className="text-[13px] font-semibold text-[#191F28]">{vName} 앱 알림 확인</p><p className="text-[11px] text-[#6B7684] mt-0.5">앱에서 인증 요청을 확인하고 승인해 주세요</p></div></div></div>
           </motion.div>
         )}
         {phase === "confirm" && (
           <motion.div key="cfm" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="h-full flex flex-col">
-            <div className="flex items-center justify-center h-12" style={{ backgroundColor: "#FEE500" }}><span className="text-[15px] font-bold text-[#191919]">카카오톡</span></div>
+            <div className="flex items-center justify-center h-12" style={{ backgroundColor: vBg }}><span className="text-[15px] font-bold" style={{ color: vTxt }}>{vName}</span></div>
             <div className="flex-1 px-6 pt-6">
-              <div className="text-center mb-6"><div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: "#FEE500" }}><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg></div><p className="text-[16px] font-bold text-[#191F28]">본인인증 요청</p><p className="text-[13px] text-[#6B7684] mt-1">보험분석 서비스</p></div>
+              <div className="text-center mb-6"><div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: vBg }}>
+                {vIsKakao ? <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.029 2 1 5.216 1 9.146c0 2.547 1.703 4.785 4.262 6.045l-1.084 3.95a.3.3 0 00.45.337l4.573-3.015c.263.02.526.033.799.033 4.971 0 9-3.216 9-7.146C19 5.216 14.971 2 10 2z" fill="#191919"/></svg> : <span className="text-[22px] font-black text-white">N</span>}
+              </div><p className="text-[16px] font-bold text-[#191F28]">본인인증 요청</p><p className="text-[13px] text-[#6B7684] mt-1">보험분석 서비스</p></div>
               <div className="bg-[#F9FAFB] rounded-2xl p-4 space-y-3 mb-6">{[["이름","김*수"],["생년월일","1991.**.**"],["요청 서비스","보험 계약 조회"],["인증 유형","간편인증"]].map(([k,v])=><div key={k} className="flex justify-between"><span className="text-[13px] text-[#6B7684]">{k}</span><span className="text-[13px] font-medium text-[#191F28]">{v}</span></div>)}</div>
               <p className="text-[11px] text-[#B0B8C1] text-center leading-relaxed">위 정보로 본인인증을 진행합니다.<br/>인증 정보는 보험 조회 목적으로만 사용됩니다.</p>
             </div>
-            <div className="px-6 pb-8 pt-3 space-y-2"><button onClick={() => setPhase("complete")} className="w-full h-[50px] rounded-xl text-[15px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: "#FEE500", color: "#191919" }}>인증하기</button><button className="w-full h-[44px] text-[14px] text-[#6B7684]">취소</button></div>
+            <div className="px-6 pb-8 pt-3 space-y-2"><button onClick={() => setPhase("complete")} className="w-full h-[50px] rounded-xl text-[15px] font-bold active:scale-[0.98] transition-transform" style={{ backgroundColor: vBg, color: vTxt }}>인증하기</button><button onClick={() => setPhase("select")} className="w-full h-[44px] text-[14px] text-[#6B7684]">취소</button></div>
           </motion.div>
         )}
         {phase === "complete" && (
