@@ -235,21 +235,55 @@ export default function HowPage() {
           </motion.p>
         </HowSection>
 
-        {/* ═══ S5: 연금 AI ═══ */}
-        <HowSection index={4} center>
-          <motion.div variants={fadeUp}>
-            <CountUp target={115} suffix="조원" duration={2.5} className="text-display font-extrabold tabular-nums text-white-90" />
+        {/* ═══ S5: 연금 시장 성장 ═══ */}
+        <HowSection index={4}>
+          <motion.h2 className="text-h2 text-white-90" variants={fadeUp}>
+            연금저축 적립금, 매년 성장 중
+          </motion.h2>
+          <motion.div className="mt-10 flex flex-col gap-5" variants={fadeUp}>
+            {[
+              { year: "2020", value: 152.5, label: "152.5조원" },
+              { year: "2021", value: 160.1, label: "160.1조원" },
+              { year: "2023", value: 167.8, label: "167.8조원" },
+              { year: "2024", value: 178.6, label: "178.6조원" },
+            ].map((d, i) => (
+              <div key={d.year} className="flex items-center gap-4">
+                <span className="w-10 text-caption tabular-nums text-white-40">
+                  {d.year}
+                </span>
+                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white-05">
+                  <motion.div
+                    className="h-full rounded-full bg-white-40"
+                    variants={{
+                      hidden: { width: 0 },
+                      visible: {
+                        width: `${(d.value / 178.6) * 100}%`,
+                        transition: {
+                          duration: 1,
+                          ease,
+                          delay: 0.3 + i * 0.12,
+                        },
+                      },
+                    }}
+                  />
+                </div>
+                <span className="w-24 text-right tabular-nums text-body font-bold text-white-90">
+                  {d.label}
+                </span>
+              </div>
+            ))}
           </motion.div>
-          <motion.p className="mt-4 text-body text-white-70" variants={fadeUp}>
-            연금저축보험 적립금 규모.
-            <br />
+          <motion.p className="mt-8 text-body text-white-50" variants={fadeUp}>
             고객의 연금이 노후에 충분한지 분석하는
             <br />
             플랫폼은 아직 없습니다.
           </motion.p>
           <Source>
             출처:{" "}
-            <SourceLink href="https://core.asiae.co.kr/article/2025073109421262910">아시아경제</SourceLink>{" "}(2025.07)
+            <SourceLink href="https://eiec.kdi.re.kr/policy/materialView.do?num=269347">
+              금융감독원
+            </SourceLink>{" "}
+            (2020~2024)
           </Source>
         </HowSection>
 
@@ -263,8 +297,6 @@ export default function HowPage() {
           </motion.div>
           <motion.p className="mt-6 text-body leading-relaxed text-white-70" variants={fadeUp}>
             764만 명만 가입. 나머지 74%는 미가입.
-            <br />
-            국민연금 사각지대만 998만 명.
           </motion.p>
           <motion.p className="mt-4 text-body leading-relaxed text-white-40" variants={fadeUp}>
             내 연금이 노후에 충분한지
