@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 140" role="img" aria-label="보필 (Bofeel) mark">
+  <title>보필 (Bofeel) mark</title>
+  <!-- Two heads above each loop -->
+  <circle cx="60" cy="22" r="16" fill="currentColor"/>
+  <circle cx="160" cy="22" r="16" fill="currentColor"/>
+  <!-- Two interlocking tilted body-loops crossing at center to form the infinity embrace -->
+  <ellipse cx="64" cy="86" rx="50" ry="38" fill="none" stroke="currentColor" stroke-width="11" transform="rotate(-18 64 86)"/>
+  <ellipse cx="156" cy="86" rx="50" ry="38" fill="none" stroke="currentColor" stroke-width="11" transform="rotate(18 156 86)"/>
+</svg>
